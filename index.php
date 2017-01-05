@@ -355,12 +355,12 @@ $areas = array(
 
 
 ## Database stuff
-$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
+$db = mysqli_connect('10.1.87.24','adminzvJZccK','5Et6HuymAm_j');
 	if (!$db) {
 	die("Unable to connect to database");
 	}
 if (!mysqli_select_db($db, 'spider')) {
-		die("Unable to access innovate database");
+		die("Unable to access spider database");
 	}
 
 $qq = "INSERT IGNORE INTO data (client,o1,o2,o3,o4,o5,d1,d2,d3,d4,d5,hash,date) VALUES ('$custName',$ops_arr[0],$ops_arr[1],$ops_arr[2],$ops_arr[3],$ops_arr[4],$dev_arr[0],$dev_arr[1],$dev_arr[2],$dev_arr[3],$dev_arr[4],'$md5',NOW())";

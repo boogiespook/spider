@@ -126,7 +126,7 @@ able {
 <body>
 <?php
 ## Database stuff
-$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
+$db = mysqli_connect('10.1.87.24','adminzvJZccK','5Et6HuymAm_j');
 	if (!$db) {
 	die("Unable to connect to database");
 	}
