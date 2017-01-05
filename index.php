@@ -332,6 +332,10 @@ $url_qry_str  = explode('&', $_SERVER['QUERY_STRING']);
 $md5 = md5($_SERVER['QUERY_STRING']);
 #echo "Hash: $md5 <br>";
 
+function checkVars($var) {
+## Check that the value given is between 0 and 5.  If not, default to -1 which is "dodgy entry"
+
+}
 
 foreach( $url_qry_str as $param )
     {
@@ -351,17 +355,17 @@ $areas = array(
 
 
 ## Database stuff
-$db = mysql_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
+$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
 	if (!$db) {
 	die("Unable to connect to database");
 	}
-if (!mysql_select_db('spider')) {
+if (!mysqli_select_db($db, 'spider')) {
 		die("Unable to access innovate database");
 	}
 
 $qq = "INSERT IGNORE INTO data (client,o1,o2,o3,o4,o5,d1,d2,d3,d4,d5,hash,date) VALUES ('$custName',$ops_arr[0],$ops_arr[1],$ops_arr[2],$ops_arr[3],$ops_arr[4],$dev_arr[0],$dev_arr[1],$dev_arr[2],$dev_arr[3],$dev_arr[4],'$md5',NOW())";
 #echo "Query: $qq <br>";
-$result = mysql_query($qq);
+$result = mysqli_query($qq);
 
 ## End DB Stuff
 

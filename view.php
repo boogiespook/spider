@@ -16,7 +16,7 @@ exit("Unable to connect to site");
 body {
     margin: 15px,15px, auto;
     font-family: 'trebuchet MS', 'Lucida sans', Arial;
-    font-size: 14px;
+    font-size: 13px;
     color: #444;
 }
 
@@ -126,11 +126,11 @@ able {
 <body>
 <?php
 ## Database stuff
-$db = mysql_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
+$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
 	if (!$db) {
 	die("Unable to connect to database");
 	}
-if (!mysql_select_db('spider')) {
+if (!mysqli_select_db($db, 'spider')) {
 		die("Unable to access spider database");
 	}
 ?>
@@ -155,9 +155,9 @@ if (!mysql_select_db('spider')) {
     <tbody>
 <?php
 $qq = "SELECT * FROM data ORDER BY client,date DESC";
-$result = mysql_query($qq);
+$result = mysqli_query($db, $qq);
 $prevClient = "QQQQQQQQQQQQQQQQQ";
-while ($row = mysql_fetch_assoc($result)) {
+while ($row = mysqli_fetch_assoc($result)) {
 if ($row['client'] != $prevClient) { 
 $col = "id=new";
 $comment = "(Most Recent)";
@@ -177,7 +177,7 @@ echo "<tr $col><td> $row[client] $comment</td>
 <td>$row[d5]</td>
 <td>$row[o5]</td>
 <td>$row[date]</td>
-<td><a target=_blank href='index.php?name=$row[client]&d1=$row[d1]&o1=$row[o1]&d2=$row[d2]&o2=$row[o2]&d3=$row[d3]&o3=$row[o3]&d4=$row[d4]&o4=$row[o4]&d5=$row[d5]&o5=$row[o5]'><img src=icon.png></a></td>
+<td align=center><a target=_blank href='index.php?name=$row[client]&d1=$row[d1]&o1=$row[o1]&d2=$row[d2]&o2=$row[o2]&d3=$row[d3]&o3=$row[o3]&d4=$row[d4]&o4=$row[o4]&d5=$row[d5]&o5=$row[o5]'><img src=icon.png></a></td>
 </tr>";
 $prevClient = $row['client'];
 } 
