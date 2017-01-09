@@ -478,6 +478,7 @@ switch (true) {
 
 array_push($analysis, "Overall, the $moreMature team are $word mature than the $lessMature team.");
 array_push($recommendations, "Re-balance the maturity levels between teams");
+
 ## Assess ops automation
 if ($ops_arr[0]  < 2) {
 array_push($analysis, "The Ops team would benefit from better use of automation techniques.");
@@ -485,17 +486,22 @@ array_push($recommendations,"SOE/CII Workshop (<a target=_blank href='https://mo
 array_push($workshops,"Adaptive SOE");
 }
 
+#$automationAnalysis = "";
 if ($ops_arr[0]  > 2) {
 	$automationAnalysis = "The Ops team provide good use of automation";
-	$automationRecommendation = "";
+#	$automationRecommendation = "";
 	if ($dev_arr[0] < 2) {
 		$automationAnalysis .= " although less automation is used by the Dev team";
 		$automationRecommendation = "Increase automation in the Dev team";
 	}
-}
-
+	if ($dev_arr[0] > 2) {
+		$automationAnalysis .= " similar to the Dev team";
+		$automationRecommendation = "None";
+	}
 array_push($analysis, $automationAnalysis);
 array_push($recommendations,$automationRecommendation);
+}
+
 
 
 ## Assess strategy
@@ -573,11 +579,12 @@ array_push($analysis,$resourcesAnalysis);
 array_push($recommendations,$resourceRecommendations);
 
 ## Look for OSEP opportunities
-if ($devStrategy < 3 && $devMethods < 3) {
+#echo "Dev Strat: $devStrategy Dev Method: $devMethods ";
+
+if ($devStrategy < 3 && $opsStrategy < 3) {
 array_push($analysis,"Increase methodology and strategy through increased use of Open Source software");
 array_push($recommendations,"OSEP Workshop");
 array_push($workshops,"Open Source Enablement Workshop");	
-
 }
 
 ?>
