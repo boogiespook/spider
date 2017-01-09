@@ -313,8 +313,8 @@ table {
 
 <?php
 # Create data arrays
-$automation_dev_array = array("Ad-hoc tool selection","Manual deployment (App + OS)","CI/CD for non-production","CI/CD defined to production","Full DevOps");
-$automation_ops_array = array("Core build for OS only","Basic (manual) provisioning","Patch & Release management (OS)","QA staging process and SOE","Automated Builds","Full PBI");
+$automation_dev_array = array("Ad-hoc tool selection","Manual deployment (App + OS)","CI/CD for non-production","CD Pipelines capable of pushing to production ","Full DevOps");
+$automation_ops_array = array("Core build for OS only","Basic (manual) provisioning","Patch & Release management (OS)","QA staging process and SOE","Automated OS Builds","Full Push Button Infrastructure");
 $methodology_dev_array = array("No defined methodology","Defined waterfall approach","Limited agile development on new projects (not including operations)","Agile development through to production & ops","Full DevOps culture");
 $methodology_ops_array = array("Hosting/Management Only","Defined SLAs and ITIL","	Compliance & Security Auditing","SOE","Full DevOps culture");
 $strategy_dev_array = array("Ad-hoc choice of application dev tools","Selected vendor tech roadmap","Iterative development of existing applications.Limited legacy strategy","Focus on new platforms & limited legacy platforms","Holistic & defined overall development strategy");
@@ -330,12 +330,6 @@ $totalDev = $totalOps = 0;
 $url_qry_str  = explode('&', $_SERVER['QUERY_STRING']);
 
 $md5 = md5($_SERVER['QUERY_STRING']);
-#echo "Hash: $md5 <br>";
-
-function checkVars($var) {
-## Check that the value given is between 0 and 5.  If not, default to -1 which is "dodgy entry"
-
-}
 
 foreach( $url_qry_str as $param )
     {
@@ -488,7 +482,7 @@ array_push($recommendations, "None");
 ## Assess ops automation
 if ($ops_arr[0]  < 2) {
 array_push($analysis, "The Ops team would benefit from better use of automation techniques.");
-array_push($recommendations,"SOE/CII Workshop");
+array_push($recommendations,"SOE/CII Workshop (<a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-adaptive-soe'>Link)</a>");
 }
 
 if ($ops_arr[0]  > 2) {
@@ -514,7 +508,7 @@ if($opsStrategy > $devStrategy) {
 }
 
 if ($overallStrategy <= 2) {
-	$strategyRecommendations .= " Innovation Lab";
+	$strategyRecommendations .= " Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'(Link)</a>";
 }
 
 array_push($recommendations,$strategyRecommendations);
@@ -529,7 +523,7 @@ $overallMethods = $opsMethods + $devMethods;
 $methodsAnalysis = "The overall methodology score is " . assessOverallVals($overallMethods);
 if($opsMethods > $devMethods) {
 	$methodsAnalysis .= " although the Operations team are more mature than the Development team.";
-	$methodRecommendations .= "Agile Development Workshop";
+	$methodRecommendations .= "Agile Development Workshop <a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-modernize-app-delivery-with-container-platforms'(Link)</a>";
 } elseif ($opsMethods < $devMethods) {
 	$methodsAnalysis .= " although the Development team are more mature than the Operations team.";
 	$methodRecommendations .= "Standard Operating Environment Workshop";
@@ -538,7 +532,7 @@ if($opsMethods > $devMethods) {
 }
 
 if ($overallMethods <= 2) {
-	$methodRecommendations .= "Innovation Lab";
+	$methodRecommendations .= "Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'>(Link)</a>";
 }
 array_push($recommendations,$methodRecommendations);
 array_push($analysis,$methodsAnalysis);
@@ -559,7 +553,7 @@ if($opsResources > $devResources) {
 }
 
 if ($overallResources <= 2) {
-	$resourceRecommendations .= "Innovation Lab";
+	$resourceRecommendations .= "Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'(Link)</a>";
 }
 array_push($analysis,$resourcesAnalysis);
 array_push($recommendations,$resourceRecommendations);
