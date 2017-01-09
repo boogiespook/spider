@@ -254,7 +254,7 @@ table {
     var config = {
         type: 'radar',
         data: {
-            labels: ["Automation", "Methodology", "Strategy", "Business Influence", "Resources"],
+            labels: ["Automation", "Methodology", "Architecture", "Strategy", "Resources"],
             datasets: [{
                 label: "Dev",
                 backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
@@ -355,7 +355,8 @@ $areas = array(
 
 
 ## Database stuff
-$db = mysqli_connect('172.30.158.48','adminzvJZccK','5Et6HuymAm_j');
+#$db = mysqli_connect('172.30.158.48','adminzvJZccK','5Et6HuymAm_j');
+$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
 	if (!$db) {
 	die("Unable to connect to database");
 	}
@@ -395,7 +396,7 @@ $d = $dev_arr[2];
 $totalDev += $d;
 $totalOps += $o;
 echo "    <tr>
-        <td>Strategy</td>
+        <td>Architecture</td>
         <td><b>$dev_arr[2]</b> - $strategy_dev_array[$d] </td>
         <td><b>$ops_arr[2]</b> - $strategy_ops_array[$o] </td>
     </tr>";        
@@ -405,7 +406,7 @@ $d = $dev_arr[3];
 $totalDev += $d;
 $totalOps += $o;
 echo "    <tr>
-        <td>Business Influence</td>
+        <td>Strategy</td>
         <td><b>$dev_arr[3]</b> - $influence_dev_array[$d] </td>
         <td><b>$ops_arr[3]</b> - $influence_ops_array[$o] </td>
     </tr>";      
@@ -420,16 +421,16 @@ echo "    <tr>
         <td><b>$ops_arr[4]</b> - $resources_ops_array[$o] </td>
     </tr>";        
 
-echo "    <tr>
-        <td>Total</td>
-        <td><b>$totalDev out of 20       <div id='dev' class=;gauge'></div> </td>
-        <td><b>$totalOps out of 20         <div id='ops' class='gauge'></div></td>
-    </tr>";        
+#echo "    <tr>
+#        <td>Total</td>
+#        <td><b>$totalDev out of 20       <div id='dev' class=;gauge'></div> </td>
+#        <td><b>$totalOps out of 20         <div id='ops' class='gauge'></div></td>
+#    </tr>";        
 
 ?>
 </table>
 
-<!--
+
 <h2>Initial Analysis of Results</h2>
 
                    <table class="bordered">
@@ -449,11 +450,11 @@ echo "    <tr>
         <td></td>
     </tr>
 <tr>
-        <td>Strategy</td>
+        <td>Architecture</td>
         <td></td>
     </tr>
 <tr>
-        <td>Business Influence</td>
+        <td>Strategy</td>
         <td></td>
     </tr>
 <tr>
@@ -462,11 +463,13 @@ echo "    <tr>
     </tr>
     </tbody>
     </table>
--->
+
 </div>
 <!-- end of main content div -->
 <!-- end of wrapper div -->
 </div>
+
+<!--
 <script>
 
 
@@ -533,6 +536,6 @@ echo "    <tr>
       });
 
     </script>
-
+-->
 </body>
 </html>

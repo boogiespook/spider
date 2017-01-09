@@ -142,10 +142,10 @@ if (!mysqli_select_db($db, 'spider')) {
         <th>Automation<br>(Ops)</th>
         <th>Methodology<br>(Dev)</th>
         <th>Methodology<br>(Ops)</th>
+        <th>Architecture<br>(Dev)</th>
+        <th>Architecture<br>(Ops)</th>
         <th>Strategy<br>(Dev)</th>
         <th>Strategy<br>(Ops)</th>
-        <th>Business<br>Influence<br>(Dev)</th>
-        <th>Business<br>Influence<br>(Ops)</th>
         <th>Resources<br>(Dev)</th>
         <th>Resources<br>(Ops)</th>
         <th>Timestamp</th>
