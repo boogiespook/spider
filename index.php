@@ -546,6 +546,7 @@ if($opsMethods > $devMethods) {
    array_push($workshops,"Standard Operating Environment Workshop");	
 } else {
 	$methodsAnalysis .= " and both teams have the same level of maturity.";
+	$methodRecommendations .= "None";
 }
 
 if ($overallMethods <= 2) {
