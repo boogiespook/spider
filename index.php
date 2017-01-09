@@ -355,8 +355,8 @@ $areas = array(
 
 
 ## Database stuff
-$db = mysqli_connect('172.30.158.48','adminzvJZccK','5Et6HuymAm_j');
-#$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
+#$db = mysqli_connect('172.30.158.48','adminzvJZccK','5Et6HuymAm_j');
+$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
 	if (!$db) {
 	die("Unable to connect to database");
 	}
@@ -420,47 +420,172 @@ echo "    <tr>
         <td><b>$dev_arr[4]</b> - $resources_dev_array[$d] </td>
         <td><b>$ops_arr[4]</b> - $resources_ops_array[$o] </td>
     </tr>";        
+  
+$analysis = $recommendations = array();
 
-#echo "    <tr>
-#        <td>Total</td>
-#        <td><b>$totalDev out of 20       <div id='dev' class=;gauge'></div> </td>
-#        <td><b>$totalOps out of 20         <div id='ops' class='gauge'></div></td>
-#    </tr>";        
+## Assess Dev vs Ops
+
+if ($totalDev > $totalOps) {
+	$moreMature = "Dev";
+	$lessMature = "Ops";
+	$top = $totalDev;
+	$bottom = $totalOps;
+	} else {
+	$moreMature = "Ops";
+	$lessMature = "Dev";
+	$top = $totalOps;
+	$bottom = $totalDev;
+}
+
+function assessVals($var) {
+switch (true) {
+case ($var <= 1):
+   $rating = "average";
+   break;
+case ($var > 1 && $var < 3):
+   $rating = "good";
+   break;
+case ($var > 3):
+   $rating = "very good";
+   break;
+}	
+return $rating;
+}
+
+function assessOverallVals($var) {
+switch (true) {
+case ($var < 3):
+   $rating = "low";
+   break;
+case ($var <= 4):
+   $rating = "average";
+   break;
+case ($var > 4 && $var < 7):
+   $rating = "good";
+   break;
+case ($var > 7):
+   $rating = "very good";
+   break;
+}	
+return $rating;
+}
+
+$ratio = ($top / $bottom);
+switch (true) {
+    case ($ratio < "1.3"):
+    	$word = "slightly more";
+    	break;
+    case ($ratio > "1.32" && $ratio < "2"):
+    	$word = "considerably more";
+    	break;
+    case ($ratio > "2"):
+    	$word = "extremely more";
+    	break;
+}
+
+array_push($analysis, "Overall, the $moreMature team are $word mature than the $lessMature team.");
+array_push($recommendations, "None");
+## Assess ops automation
+if ($ops_arr[0]  < 2) {
+array_push($analysis, "The Ops team would benefit from better use of automation techniques.");
+array_push($recommendations,"SOE/CII Workshop");
+}
+
+if ($ops_arr[0]  > 2) {
+array_push($analysis, "The Ops team provide good use of automation");
+array_push($recommendations,"None");
+}
+
+
+## Assess strategy
+$opsStrategy = $ops_arr[3];
+$devStrategy = $dev_arr[3];
+$overallStrategy = $opsStrategy + $devStrategy;
+$strategyAnalysis = "The overall strategy awareness is " . assessOverallVals($overallStrategy);
+$strategyRecommendations = "";
+if($opsStrategy > $devStrategy) {
+	$strategyAnalysis .= " although the Operations team are more mature than the Development team.";
+	$strategyRecommendations .= "Strategy and Business Influence Workshop";
+} elseif ($opsStrategy < $devStrategy) {
+	$strategyAnalysis .= " although the Development team are more mature than the Operations team.";
+	$strategyRecommendations .= "Strategy and Business Influence Workshop";
+} else {
+	$strategyAnalysis .= " although both teams have the same level of maturity";
+}
+
+if ($overallStrategy <= 2) {
+	$strategyRecommendations .= " Innovation Lab";
+}
+
+array_push($recommendations,$strategyRecommendations);
+array_push($analysis,$strategyAnalysis);
+
+
+## Assess methodology
+$opsMethods = $ops_arr[1];
+$devMethods = $dev_arr[1];
+$methodRecommendations = "";
+$overallMethods = $opsMethods + $devMethods;
+$methodsAnalysis = "The overall methodology score is " . assessOverallVals($overallMethods);
+if($opsMethods > $devMethods) {
+	$methodsAnalysis .= " although the Operations team are more mature than the Development team.";
+	$methodRecommendations .= "Agile Development Workshop";
+} elseif ($opsMethods < $devMethods) {
+	$methodsAnalysis .= " although the Development team are more mature than the Operations team.";
+	$methodRecommendations .= "Standard Operating Environment Workshop";
+} else {
+	$methodsAnalysis .= " and both teams have the same level of maturity.";
+}
+
+if ($overallMethods <= 2) {
+	$methodRecommendations .= "Innovation Lab";
+}
+array_push($recommendations,$methodRecommendations);
+array_push($analysis,$methodsAnalysis);
+
+# Assess Resources
+$opsResources = $ops_arr[4];
+$devResources = $dev_arr[4];
+$overallResources = $opsResources + $devResources;
+$resourcesAnalysis = "The overall skills rating for Resources is " . assessOverallVals($overallResources);
+if($opsResources > $devResources) {
+	$resourcesAnalysis .= " although the Operations team are more mature than the Development team.";
+	$resourceRecommendations .= "Agile Development Workshop";
+} elseif ($opsResources < $devResources) {
+	$resourcesAnalysis .= " although the Development team are more mature than the Operations team.";
+	$resourceRecommendations .= "Red Had Certification (RHCE) for Operations team";
+} else {
+	$resourcesAnalysis .= " and both teams have the same level of maturity.";
+}
+
+if ($overallResources <= 2) {
+	$resourceRecommendations .= "Innovation Lab";
+}
+array_push($analysis,$resourcesAnalysis);
+array_push($recommendations,$resourceRecommendations);
+
+## Look for OSEP opportunities
+if ($devStrategy < 3 && $devMethods < 3) {
+array_push($analysis,"Increase methodology and strategy through increased use of Open Source software");
+array_push($recommendations,"OSEP Workshop");
+}
 
 ?>
 </table>
 
-
-<h2>Initial Analysis of Results</h2>
-
+<br>
                    <table class="bordered">
     <thead>
     <tr>
-        <th>Area</th>        
+        <th>Analysis of Results</th>
         <th>Recommendations</th>
     </tr>
     </thead>
     <tbody>
-<tr>
-        <td>Automation</td>
-        <td></td>
-    </tr>
-<tr>
-        <td>Methodology</td>
-        <td></td>
-    </tr>
-<tr>
-        <td>Architecture</td>
-        <td></td>
-    </tr>
-<tr>
-        <td>Strategy</td>
-        <td></td>
-    </tr>
-<tr>
-        <td>Resources</td>
-        <td></td>
-    </tr>
+<?php foreach ($analysis as $key => $answer) {
+echo "<tr><td>$answer</td><td>$recommendations[$key]</td></tr>";
+}
+?>
     </tbody>
     </table>
 
