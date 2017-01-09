@@ -300,8 +300,7 @@ table {
 </div>
 
 <div id="rightcol">
-<h2>Results</h2>
-
+<br>
                    <table class="bordered">
     <thead>
     <tr>
@@ -324,7 +323,7 @@ $influence_ops_array = array("Instances of negative business impact","Good funct
 $resources_dev_array = array("Traditional programming techniques with No agreed tools","Initial agile adoption with 1 backlog per team","Extended team collaboration. Common DevOps skills","Continous cross-team improvement and collaboration","100% DevOps projects and Full cross-functional teams");
 $resources_ops_array = array("Standard \"Unix-like\" skills & no scripting skills","Direct VM interaction, limited scripting","Dynamic, templated images","Fully automated & deployment skills","100% DevOps engineers");
 $totalDev = $totalOps = 0;
-
+$workshops = array();
 
 # Get all the URL vals
 $url_qry_str  = explode('&', $_SERVER['QUERY_STRING']);
@@ -478,17 +477,25 @@ switch (true) {
 }
 
 array_push($analysis, "Overall, the $moreMature team are $word mature than the $lessMature team.");
-array_push($recommendations, "None");
+array_push($recommendations, "Re-balance the maturity levels between teams");
 ## Assess ops automation
 if ($ops_arr[0]  < 2) {
 array_push($analysis, "The Ops team would benefit from better use of automation techniques.");
 array_push($recommendations,"SOE/CII Workshop (<a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-adaptive-soe'>Link)</a>");
+array_push($workshops,"Adaptive SOE");
 }
 
 if ($ops_arr[0]  > 2) {
-array_push($analysis, "The Ops team provide good use of automation");
-array_push($recommendations,"None");
+	$automationAnalysis = "The Ops team provide good use of automation";
+	$automationRecommendation = "";
+	if ($dev_arr[0] < 2) {
+		$automationAnalysis .= " although less automation is used by the Dev team";
+		$automationRecommendation = "Increase automation in the Dev team";
+	}
 }
+
+array_push($analysis, $automationAnalysis);
+array_push($recommendations,$automationRecommendation);
 
 
 ## Assess strategy
@@ -500,6 +507,7 @@ $strategyRecommendations = "";
 if($opsStrategy > $devStrategy) {
 	$strategyAnalysis .= " although the Operations team are more mature than the Development team.";
 	$strategyRecommendations .= "Strategy and Business Influence Workshop";
+	array_push($workshops,"Strategy and Business Influence Workshop");
 } elseif ($opsStrategy < $devStrategy) {
 	$strategyAnalysis .= " although the Development team are more mature than the Operations team.";
 	$strategyRecommendations .= "Strategy and Business Influence Workshop";
@@ -509,6 +517,7 @@ if($opsStrategy > $devStrategy) {
 
 if ($overallStrategy <= 2) {
 	$strategyRecommendations .= " Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'(Link)</a>";
+	array_push($workshops,"Open Innovation Lab Workshop");	
 }
 
 array_push($recommendations,$strategyRecommendations);
@@ -524,15 +533,19 @@ $methodsAnalysis = "The overall methodology score is " . assessOverallVals($over
 if($opsMethods > $devMethods) {
 	$methodsAnalysis .= " although the Operations team are more mature than the Development team.";
 	$methodRecommendations .= "Agile Development Workshop <a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-modernize-app-delivery-with-container-platforms'(Link)</a>";
+   array_push($workshops,"Agile Development Workshop");	
 } elseif ($opsMethods < $devMethods) {
 	$methodsAnalysis .= " although the Development team are more mature than the Operations team.";
 	$methodRecommendations .= "Standard Operating Environment Workshop";
+   array_push($workshops,"Standard Operating Environment Workshop");	
 } else {
 	$methodsAnalysis .= " and both teams have the same level of maturity.";
 }
 
 if ($overallMethods <= 2) {
 	$methodRecommendations .= "Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'>(Link)</a>";
+   array_push($workshops,"Open Innovation Lab");	
+
 }
 array_push($recommendations,$methodRecommendations);
 array_push($analysis,$methodsAnalysis);
@@ -540,6 +553,7 @@ array_push($analysis,$methodsAnalysis);
 # Assess Resources
 $opsResources = $ops_arr[4];
 $devResources = $dev_arr[4];
+$resourceRecommendations = "";
 $overallResources = $opsResources + $devResources;
 $resourcesAnalysis = "The overall skills rating for Resources is " . assessOverallVals($overallResources);
 if($opsResources > $devResources) {
@@ -562,6 +576,8 @@ array_push($recommendations,$resourceRecommendations);
 if ($devStrategy < 3 && $devMethods < 3) {
 array_push($analysis,"Increase methodology and strategy through increased use of Open Source software");
 array_push($recommendations,"OSEP Workshop");
+array_push($workshops,"Open Source Enablement Workshop");	
+
 }
 
 ?>
@@ -583,6 +599,21 @@ echo "<tr><td>$answer</td><td>$recommendations[$key]</td></tr>";
     </tbody>
     </table>
 
+<br>
+    <table class="bordered">
+    <thead>
+    <tr>
+        <th>Proposed Workshops</th>        
+    </tr>
+    </thead>
+<tbody>
+<?php
+foreach (array_unique($workshops) as $workshop) {
+echo "<tr><td>$workshop</td></tr>";
+}
+?>
+</tbody>
+</table>
 </div>
 <!-- end of main content div -->
 <!-- end of wrapper div -->
