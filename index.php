@@ -395,6 +395,8 @@ $workshopLinks = array(
 	"OSEP" => "<a target=_blank href='https://mojo.redhat.com/groups/osep-community-of-practice'>Open Source Enablement</a>",
 	"BusinessInfluence" => "<a target=_blank href='#'>Strategy and Business Influence</a>",
 	"AnsibleAutomation" => "<a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-accelerate-it-automation-with-ansible'>Ansible Automation</a>",
+	"CloudInfrastructure" => "<a target=_blank href='https://mojo.redhat.com/docs/DOC-1097461'>Cloud Infrastructure</a>",
+	"CloudManagement" => "<a target=_blank href='https://mojo.redhat.com/docs/DOC-1097463'>Cloud Management</a>",
 );
 
 # Get all the URL vals
@@ -697,6 +699,39 @@ if ($overallResources <= 2) {
 }
 array_push($analysis,$resourcesAnalysis);
 array_push($recommendations,$resourceRecommendations);
+
+
+## Assess architecture
+$opsArchs = $ops_arr[2];
+$devArchs = $dev_arr[2];
+$ArchRecommendations = "";
+$overallArchs = $opsArchs + $devArchs;
+$ArchsAnalysis = "The overall rating for architecture is " . assessOverallVals($overallArchs);
+if($opsArchs > $devArchs) {
+	$ArchsAnalysis .= " although the Operations team have a higher architecture rating than the Development team.";
+	$ArchRecommendations .= "Container Platforms <br> Agile Development";
+   array_push($workshops,$workshopLinks['ContainerPlatforms']);	
+   array_push($workshops,$workshopLinks['AgileDevelopment']);	
+     
+} elseif ($opsArchs < $devArchs) {
+	$ArchsAnalysis .= " although the Development team are more mature than the Operations team.";
+	$ArchRecommendations .= "Increase infrastructure management and cloud awareness";
+   array_push($workshops,$workshopLinks['CloudInfrastructure']);	
+   array_push($workshops,$workshopLinks['CloudManagement']);	
+} else {
+	$ArchsAnalysis .= " and both teams have the same level of maturity.";
+	$ArchRecommendations .= " - ";
+}
+
+if ($devArchs < 2) {
+   array_push($workshops,$workshopLinks['ContainerPlatforms']);	
+   array_push($workshops,$workshopLinks['AgileDevelopment']);	
+   $ArchsAnalysis .= " The Dev team could be improved through the use of more agile based architectures";
+}
+
+array_push($recommendations,$ArchRecommendations);
+array_push($analysis,$ArchsAnalysis);
+
 
 ## Look for OSEP opportunities
 
