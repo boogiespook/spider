@@ -495,7 +495,7 @@ if ($ops_arr[0]  > 2) {
 		$automationRecommendation = "Increase automation in the Dev team";
 	}
 	if ($dev_arr[0] > 2) {
-		$automationAnalysis .= " similar to the Dev team";
+		$automationAnalysis .= " which is similar to the Dev team";
 		$automationRecommendation = "None";
 	}
 array_push($analysis, $automationAnalysis);
@@ -537,7 +537,7 @@ $methodRecommendations = "";
 $overallMethods = $opsMethods + $devMethods;
 $methodsAnalysis = "The overall methodology score is " . assessOverallVals($overallMethods);
 if($opsMethods > $devMethods) {
-	$methodsAnalysis .= " although the Operations team are more mature than the Development team.";
+	$methodsAnalysis .= " although the Operations team have more mature methodology than the Development team.";
 	$methodRecommendations .= "Agile Development Workshop <a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-modernize-app-delivery-with-container-platforms'(Link)</a>";
    array_push($workshops,"Agile Development Workshop");	
 } elseif ($opsMethods < $devMethods) {
@@ -568,13 +568,13 @@ if($opsResources > $devResources) {
 	$resourceRecommendations .= "Agile Development Workshop";
 } elseif ($opsResources < $devResources) {
 	$resourcesAnalysis .= " although the Development team are more mature than the Operations team.";
-	$resourceRecommendations .= "Red Had Certification (RHCE) for Operations team";
+	$resourceRecommendations .= "Red Hat Certification (RHCE) for Operations team";
 } else {
 	$resourcesAnalysis .= " and both teams have the same level of maturity.";
 }
 
 if ($overallResources <= 2) {
-	$resourceRecommendations .= "Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'(Link)</a>";
+	$resourceRecommendations .= "Increase overall skills through an Open Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'(Link)</a>";
 }
 array_push($analysis,$resourcesAnalysis);
 array_push($recommendations,$resourceRecommendations);
