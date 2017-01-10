@@ -17,7 +17,7 @@ body {
 }
 
 #wrapper {
-width: 90%;
+width: 95%;
 background-color: #FFF;
 margin-left:auto;
 margin-right:auto;
@@ -28,6 +28,13 @@ height: 30px;
 border-bottom: thin solid #000000;
 }
 
+#rh-logo img {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    float: right;
+}
+
 #content {
 float: left;
 width: 50%;
@@ -36,7 +43,7 @@ width: 50%;
 
 #rightcol {
 float: right;
-width: 40%;
+width: 50%;
 vertical-align: middle;
 }
 
@@ -198,12 +205,65 @@ table {
 }
   
 </style>
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#analysis-dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "drop",
+        duration: 1000
+      },
+      minWidth: 1000
+    });
+ 
+    $( "#analysis-opener" ).on( "click", function() {
+      $( "#analysis-dialog" ).dialog( "open" );
+    });
+  } );
+  </script>
+
+  <script>
+  $( function() {
+    $( "#workshop-dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "drop",
+        duration: 1000
+      },
+      minWidth: 800
+    });
+ 
+    $( "#workshop-opener" ).on( "click", function() {
+      $( "#workshop-dialog" ).dialog( "open" );
+    });
+  } );
+  </script>
+
 </head>
 
 <body>
+      <div id="rh-logo">      
+<img src="shadowman_very_small.png" />      
+      </div>
 <?php  date_default_timezone_set("Europe/London"); ?>
       <div id="wrapper">
+
       <header>
+
       <center>
       <h2>Ready to Innovate Assessment for <?php echo $_GET['name']; ?></h2>
       </center>
@@ -502,6 +562,11 @@ array_push($analysis, $automationAnalysis);
 array_push($recommendations,$automationRecommendation);
 }
 
+## Additional Automation stuff
+if ($ops_arr[0] < 1) {
+array_push($analysis,"No automated patch or release management.");
+array_push($recommendations,"Consider using automation tools such as puppet and/or ansible.");
+}
 
 
 ## Assess strategy
@@ -557,6 +622,12 @@ if ($overallMethods <= 2) {
 array_push($recommendations,$methodRecommendations);
 array_push($analysis,$methodsAnalysis);
 
+## Additional Methodology stuff
+if ($opsMethods <2) {
+array_push($analysis,"No automated security compliance in use.");
+array_push($recommendations,"Consider using tools such as OpenSCAP");
+}
+
 # Assess Resources
 $opsResources = $ops_arr[4];
 $devResources = $dev_arr[4];
@@ -590,8 +661,7 @@ array_push($workshops,"Open Source Enablement Workshop");
 
 ?>
 </table>
-
-<br>
+<div id="analysis-dialog" title="Analysis of Results">
                    <table class="bordered">
     <thead>
     <tr>
@@ -607,11 +677,16 @@ echo "<tr><td>$answer</td><td>$recommendations[$key]</td></tr>";
     </tbody>
     </table>
 
-<br>
+<br></div>
+<br> 
+<button id="analysis-opener">Open Analysis Dialog</button>
+
+<div id="workshop-dialog" title="Recommended Workshops">
+
     <table class="bordered">
     <thead>
     <tr>
-        <th>Proposed Workshops</th>        
+        <th>Workshops</th>        
     </tr>
     </thead>
 <tbody>
@@ -623,8 +698,11 @@ echo "<tr><td>$workshop</td></tr>";
 </tbody>
 </table>
 </div>
+<button id="workshop-opener">Open Workshop Dialogue</button>
+</div>
 <!-- end of main content div -->
 <!-- end of wrapper div -->
+
 </div>
 
 <!--
@@ -695,5 +773,6 @@ echo "<tr><td>$workshop</td></tr>";
 
     </script>
 -->
+
 </body>
 </html>
