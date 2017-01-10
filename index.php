@@ -397,6 +397,9 @@ $workshopLinks = array(
 	"AnsibleAutomation" => "<a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-accelerate-it-automation-with-ansible'>Ansible Automation</a>",
 	"CloudInfrastructure" => "<a target=_blank href='https://mojo.redhat.com/docs/DOC-1097461'>Cloud Infrastructure</a>",
 	"CloudManagement" => "<a target=_blank href='https://mojo.redhat.com/docs/DOC-1097463'>Cloud Management</a>",
+	"BusinessAutomation" => "<a target=_blank href='https://mojo.redhat.com/docs/DOC-1041221'>Business Automation</a>",
+	"WalledGarden" => "<a target=_blank href='#'>Walled Garden Presentation</a>",
+
 );
 
 # Get all the URL vals
@@ -568,6 +571,7 @@ if ($ops_arr[0]  > 2) {
 	if ($dev_arr[0] < 2) {
 		$automationAnalysis .= " although less automation is used by the Dev team";
 		$automationRecommendation = "Increase automation in the Dev team";
+		array_push($workshops,$workshopLinks['BusinessAutomation']);		
 	}
 	if ($dev_arr[0] > 2) {
 		$automationAnalysis .= " which is similar to the Dev team";
@@ -588,7 +592,8 @@ $devAutomationAnalysis = $devAutomationRecommendations = "";
 switch($dev_arr[0]) {
 	case 0:
 		$devAutomationAnalysis .= "No control over which tools are used by developers";
-		$devAutomationRecommendations .= "Provide a list of support development tools";
+		$devAutomationRecommendations .= "Provide a list of support development tools (aka 'Walled Garden')";
+		array_push($workshops,$workshopLinks['WalledGarden']);
 		break;
 	case 1:
 		$devAutomationAnalysis .= "All deployments involve manual intervention";
@@ -603,7 +608,12 @@ switch($dev_arr[0]) {
 if ($devAutomationAnalysis != "") {
 array_push($analysis,$devAutomationAnalysis);
 array_push($recommendations,$devAutomationRecommendations);
+}
 
+if ($dev_arr[0] < 1) {
+array_push($analysis,"No automation within the Dev team");
+array_push($recommendations,"Consider using CI/CD tooling.");
+array_push($workshops,$workshopLinks['BusinessAutomation']);
 }
 
 ## Assess strategy
@@ -616,18 +626,20 @@ if($opsStrategy > $devStrategy) {
 	$strategyAnalysis .= " although the Operations team are more mature than the Development team.";
 	$strategyRecommendations .= "Strategy and Business Influence Workshop";
 	array_push($workshops,"Strategy and Business Influence Workshop");
+	array_push($workshops,"Business Influence Mapping");	
 } elseif ($opsStrategy < $devStrategy) {
 	$strategyAnalysis .= " although the Development team are more mature than the Operations team.";
 	$strategyRecommendations .= "Strategy and Business Influence Workshop";
 } else {
 	$strategyAnalysis .= " although both teams have the same level of maturity";
-	$strategyRecommendations .= " - ";
+	$strategyRecommendations .= "";
 }
 
 if ($overallStrategy <= 2) {
 	$strategyRecommendations .= "Open Innovation Lab & Strategy and Business Influence Workshop";
 	array_push($workshops,$workshopLinks['InnovationLabs']);	
 	array_push($workshops,$workshopLinks['BusinessInfluence']);	
+	array_push($workshops,"Business Influence Mapping");	
 }
 
 array_push($recommendations,$strategyRecommendations);
@@ -652,7 +664,7 @@ if($opsMethods > $devMethods) {
    array_push($workshops,$workshopLinks['AdaptiveSOE']);	
 } else {
 	$methodsAnalysis .= " and both teams have the same level of maturity.";
-	$methodRecommendations .= " - ";
+	$methodRecommendations .= "";
 }
 
 if ($devMethods < 2) {
@@ -691,7 +703,7 @@ if($opsResources > $devResources) {
 	$resourceRecommendations .= $workshopLinks['RHCE'];
 } else {
 	$resourcesAnalysis .= " and both teams have the same level of maturity.";
-	$resourceRecommendations .= " - ";
+	$resourceRecommendations .= "";
 	}
 
 if ($overallResources <= 2) {
@@ -720,7 +732,7 @@ if($opsArchs > $devArchs) {
    array_push($workshops,$workshopLinks['CloudManagement']);	
 } else {
 	$ArchsAnalysis .= " and both teams have the same level of maturity.";
-	$ArchRecommendations .= " - ";
+	$ArchRecommendations .= "";
 }
 
 if ($devArchs < 2) {
@@ -773,6 +785,7 @@ echo "<tr><td>$answer</td><td>$recommendations[$key]</td></tr>";
     </thead>
 <tbody>
 <?php
+#sort($workshops);
 foreach (array_unique($workshops) as $workshop) {
 echo "<tr><td>$workshop</td></tr>";
 }
