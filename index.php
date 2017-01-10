@@ -619,6 +619,7 @@ if($opsStrategy > $devStrategy) {
 	$strategyRecommendations .= "Strategy and Business Influence Workshop";
 } else {
 	$strategyAnalysis .= " although both teams have the same level of maturity";
+	$strategyRecommendations .= " - ";
 }
 
 if ($overallStrategy <= 2) {
@@ -649,6 +650,7 @@ if($opsMethods > $devMethods) {
    array_push($workshops,$workshopLinks['AdaptiveSOE']);	
 } else {
 	$methodsAnalysis .= " and both teams have the same level of maturity.";
+	$methodRecommendations .= " - ";
 }
 
 if ($devMethods < 2) {
@@ -687,7 +689,8 @@ if($opsResources > $devResources) {
 	$resourceRecommendations .= $workshopLinks['RHCE'];
 } else {
 	$resourcesAnalysis .= " and both teams have the same level of maturity.";
-}
+	$resourceRecommendations .= " - ";
+	}
 
 if ($overallResources <= 2) {
 	$resourceRecommendations .= "Increase overall skills through an Open Innovation Lab</a>";
