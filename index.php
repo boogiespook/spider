@@ -400,6 +400,7 @@ $workshopLinks = array(
 	"BusinessAutomation" => "<a target=_blank href='https://mojo.redhat.com/docs/DOC-1041221'>Business Automation</a>",
 	"WalledGarden" => "<a target=_blank href='#'>Walled Garden Presentation</a>",
 	"DevOpsReview" => "<a target=_blank href='#'>Review of DevOps Skills</a>",
+	"Microservices" => "<a target=_blank href='#'>Microservices : Design and Architecture</a>",
 );
 
 # Get all the URL vals
@@ -726,13 +727,13 @@ $overallArchs = $opsArchs + $devArchs;
 $ArchsAnalysis = "The overall rating for architecture is " . assessOverallVals($overallArchs);
 if($opsArchs > $devArchs) {
 	$ArchsAnalysis .= " although the Operations team have a higher architecture rating than the Development team.";
-	$ArchRecommendations .= "Container Platforms <br> Agile Development";
+	$ArchRecommendations .= "Container Platforms <br> Agile Development.";
    array_push($workshops,$workshopLinks['ContainerPlatforms']);	
    array_push($workshops,$workshopLinks['AgileDevelopment']);	
      
 } elseif ($opsArchs < $devArchs) {
 	$ArchsAnalysis .= " although the Development team are more mature than the Operations team.";
-	$ArchRecommendations .= "Increase infrastructure management and cloud awareness";
+	$ArchRecommendations .= "Increase infrastructure management and cloud awareness.";
    array_push($workshops,$workshopLinks['CloudInfrastructure']);	
    array_push($workshops,$workshopLinks['CloudManagement']);	
 } else {
@@ -743,7 +744,9 @@ if($opsArchs > $devArchs) {
 if ($devArchs < 2) {
    array_push($workshops,$workshopLinks['ContainerPlatforms']);	
    array_push($workshops,$workshopLinks['AgileDevelopment']);	
-   $ArchsAnalysis .= " The Dev team could be improved through the use of more agile based architectures";
+   array_push($workshops,$workshopLinks['Microservices']);	
+   $ArchsAnalysis .= " The Dev team could be improved through the use of more agile based architectures and microservices";
+	$ArchRecommendations .= " Increase use of microservices";
 }
 
 array_push($recommendations,$ArchRecommendations);
