@@ -542,8 +542,9 @@ array_push($recommendations, "Re-balance the maturity levels between teams");
 ## Assess ops automation
 if ($ops_arr[0]  < 2) {
 array_push($analysis, "The Ops team would benefit from better use of automation techniques.");
-array_push($recommendations,"SOE/CII Workshop (<a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-adaptive-soe'>Link)</a>");
-array_push($workshops,"Adaptive SOE");
+array_push($recommendations,"SOE/CII Workshop</a>");
+array_push($workshops,"<a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-adaptive-soe'>Adaptive SOE</a>");
+
 }
 
 #$automationAnalysis = "";
@@ -568,6 +569,28 @@ array_push($analysis,"No automated patch or release management.");
 array_push($recommendations,"Consider using automation tools such as puppet and/or ansible.");
 }
 
+## Dev Automation
+$devAutomationAnalysis = $devAutomationRecommendations = "";
+switch($dev_arr[0]) {
+	case 0:
+		$devAutomationAnalysis .= "No control over which tools are used by developers";
+		$devAutomationRecommendations .= "Provide a list of support development tools";
+		break;
+	case 1:
+		$devAutomationAnalysis .= "All deplolments involve manual intervention";
+		$devAutomationRecommendations .= "Invest in CI/CD technologies";
+		break;
+	case 2:
+		$devAutomationAnalysis .= "Good use of automation in pre-production environments";
+		$devAutomationRecommendations .= "Enable CI/CD pipelines to production environments";
+		break;
+}
+
+if ($devAutomationAnalysis != "") {
+array_push($analysis,$devAutomationAnalysis);
+array_push($recommendations,$devAutomationRecommendations);
+
+}
 
 ## Assess strategy
 $opsStrategy = $ops_arr[3];
@@ -588,7 +611,7 @@ if($opsStrategy > $devStrategy) {
 
 if ($overallStrategy <= 2) {
 	$strategyRecommendations .= " Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'(Link)</a>";
-	array_push($workshops,"Open Innovation Lab Workshop");	
+	array_push($workshops,"<a target=_blank href='https://mojo.redhat.com/groups/na-emerging-technology-practice/projects/red-hat-open-innovation-labs'>Open Innovation Lab Workshop</a>");	
 }
 
 array_push($recommendations,$strategyRecommendations);
@@ -604,11 +627,11 @@ $methodsAnalysis = "The overall methodology score is " . assessOverallVals($over
 if($opsMethods > $devMethods) {
 	$methodsAnalysis .= " although the Operations team have more mature methodology than the Development team.";
 	$methodRecommendations .= "Agile Development Workshop <a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-modernize-app-delivery-with-container-platforms'(Link)</a>";
-   array_push($workshops,"Agile Development Workshop");	
+   array_push($workshops,"<a target=_blank href='https://mojo.redhat.com/docs/DOC-965558'>Agile Development Workshop</a>");	
 } elseif ($opsMethods < $devMethods) {
 	$methodsAnalysis .= " although the Development team are more mature than the Operations team.";
 	$methodRecommendations .= "Standard Operating Environment Workshop";
-   array_push($workshops,"Standard Operating Environment Workshop");	
+   array_push($workshops,"<a target=_blank href='https://mojo.redhat.com/community/consulting-customer-training/consulting-services-solutions/projects/consulting-solution-adaptive-soe'>Adaptive SOE</a>");	
 } else {
 	$methodsAnalysis .= " and both teams have the same level of maturity.";
 	$methodRecommendations .= "None";
@@ -616,7 +639,7 @@ if($opsMethods > $devMethods) {
 
 if ($overallMethods <= 2) {
 	$methodRecommendations .= "Innovation Lab <a target=_blank href='https://mojo.redhat.com/docs/DOC-1075330'>(Link)</a>";
-   array_push($workshops,"Open Innovation Lab");	
+   array_push($workshops,"<a target=_blank href='https://mojo.redhat.com/groups/na-emerging-technology-practice/projects/red-hat-open-innovation-labs'>Open Innovation Lab Workshop</a>");	
 
 }
 array_push($recommendations,$methodRecommendations);
@@ -626,6 +649,7 @@ array_push($analysis,$methodsAnalysis);
 if ($opsMethods <2) {
 array_push($analysis,"No automated security compliance in use.");
 array_push($recommendations,"Consider using tools such as OpenSCAP");
+array_push($workshops,"<a target=_blank href='https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/chap-Compliance_and_Vulnerability_Scanning.html'>Compliance and Vulnerability Scanning Guide</a>");
 }
 
 # Assess Resources
@@ -639,7 +663,7 @@ if($opsResources > $devResources) {
 	$resourceRecommendations .= "Agile Development Workshop";
 } elseif ($opsResources < $devResources) {
 	$resourcesAnalysis .= " although the Development team are more mature than the Operations team.";
-	$resourceRecommendations .= "Red Hat Certification (RHCE) for Operations team";
+	$resourceRecommendations .= "<a target=_blank href='https://www.redhat.com/en/services/certification/rhce'>Red Hat Certification (RHCE)</a> for Operations team";
 } else {
 	$resourcesAnalysis .= " and both teams have the same level of maturity.";
 }
@@ -656,7 +680,7 @@ array_push($recommendations,$resourceRecommendations);
 if ($devStrategy < 3 && $opsStrategy < 3) {
 array_push($analysis,"Increase methodology and strategy through increased use of Open Source software");
 array_push($recommendations,"OSEP Workshop");
-array_push($workshops,"Open Source Enablement Workshop");	
+array_push($workshops,"<a target=_blank href='https://mojo.redhat.com/groups/osep-community-of-practice'>Open Source Enablement Workshop</a>");	
 }
 
 ?>
@@ -698,7 +722,7 @@ echo "<tr><td>$workshop</td></tr>";
 </tbody>
 </table>
 </div>
-<button id="workshop-opener">Open Workshop Dialogue</button>
+<button id="workshop-opener">Workshop Links</button>
 </div>
 <!-- end of main content div -->
 <!-- end of wrapper div -->
