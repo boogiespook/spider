@@ -244,7 +244,7 @@ table {
         effect: "drop",
         duration: 1000
       },
-      minWidth: 800
+      minWidth: 400
     });
  
     $( "#workshop-opener" ).on( "click", function() {
@@ -425,8 +425,8 @@ $areas = array(
 
 
 ## Database stuff
-$db = mysqli_connect('172.30.158.48','adminzvJZccK','5Et6HuymAm_j');
-#$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
+#$db = mysqli_connect('172.30.158.48','adminzvJZccK','5Et6HuymAm_j');
+$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
 	if (!$db) {
 	die("Unable to connect to database");
 	}
@@ -759,13 +759,17 @@ array_push($workshops,$workshopLinks['OSEP']);
                    <table class="bordered">
     <thead>
     <tr>
-        <th>Analysis of Results</th>
+        <th>ID</th>
+        <th>Analysis</th>
         <th>Recommendations</th>
     </tr>
     </thead>
     <tbody>
-<?php foreach ($analysis as $key => $answer) {
-echo "<tr><td>$answer</td><td>$recommendations[$key]</td></tr>";
+<?php 
+$i=1;
+foreach ($analysis as $key => $answer) {
+echo "<tr><td>$i</td><td>$answer</td><td>$recommendations[$key]</td></tr>";
+$i++;
 }
 ?>
     </tbody>
@@ -780,14 +784,16 @@ echo "<tr><td>$answer</td><td>$recommendations[$key]</td></tr>";
     <table class="bordered">
     <thead>
     <tr>
+    	  <th>ID</th>
         <th>Workshops</th>        
     </tr>
     </thead>
 <tbody>
 <?php
-#sort($workshops);
+$i=1;
 foreach (array_unique($workshops) as $workshop) {
-echo "<tr><td>$workshop</td></tr>";
+echo "<tr><td>$i</td><td>$workshop</td></tr>";
+$i++;
 }
 ?>
 </tbody>
