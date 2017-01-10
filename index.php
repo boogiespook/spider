@@ -399,7 +399,7 @@ $workshopLinks = array(
 	"CloudManagement" => "<a target=_blank href='https://mojo.redhat.com/docs/DOC-1097463'>Cloud Management</a>",
 	"BusinessAutomation" => "<a target=_blank href='https://mojo.redhat.com/docs/DOC-1041221'>Business Automation</a>",
 	"WalledGarden" => "<a target=_blank href='#'>Walled Garden Presentation</a>",
-
+	"DevOpsReview" => "<a target=_blank href='#'>Review of DevOps Skills</a>",
 );
 
 # Get all the URL vals
@@ -712,6 +712,11 @@ if ($overallResources <= 2) {
 array_push($analysis,$resourcesAnalysis);
 array_push($recommendations,$resourceRecommendations);
 
+if ($devResources < 2) {
+array_push($analysis,"Lack of DevOps Skills");
+array_push($recommendations,"Review current DevOps Skills");
+array_push($workshops,$workshopLinks['DevOpsReview']);
+}
 
 ## Assess architecture
 $opsArchs = $ops_arr[2];
