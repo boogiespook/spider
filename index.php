@@ -371,6 +371,7 @@ table {
     </thead>
 
 <?php
+include 'database.php';
 # Create data arrays
 $automation_dev_array = array("Ad-hoc tool selection","Manual deployment (App + OS)","CI/CD for non-production","CD Pipelines capable of pushing to production ","Full DevOps");
 $automation_ops_array = array("Core build for OS only","Basic (manual) provisioning","Patch & Release management (OS)","QA staging process and SOE","Automated OS Builds","Full Push Button Infrastructure");
@@ -425,24 +426,12 @@ $areas = array(
 );
 
 
-## Database stuff
-if ($_SERVER["HTTP_HOST"] == "localhost") {
-	$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
-} else {
-	$db = mysqli_connect('172.30.158.48','adminzvJZccK','5Et6HuymAm_j');
-}
-	if (!$db) {
-	die("Unable to connect to database");
-	}
-if (!mysqli_select_db($db, 'spider')) {
-		die("Unable to access innovate database");
-	}
+## Connect to the Database 
+connectDB();
 
 $qq = "INSERT IGNORE INTO data (client,o1,o2,o3,o4,o5,d1,d2,d3,d4,d5,hash,date) VALUES ('$custName',$ops_arr[0],$ops_arr[1],$ops_arr[2],$ops_arr[3],$ops_arr[4],$dev_arr[0],$dev_arr[1],$dev_arr[2],$dev_arr[3],$dev_arr[4],'$md5',NOW())";
-#echo "Query: $qq <br>";
 $result = mysqli_query($db, $qq);
 
-## End DB Stuff
 
 $o = $ops_arr[0];
 $d = $dev_arr[0];
