@@ -806,9 +806,7 @@ $i++;
 
 </div>
 <br>
-<center>
-<img src="miffy.png"/>
-</center>
+
 <!--
 <script>
 
