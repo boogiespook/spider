@@ -805,7 +805,10 @@ $i++;
 <!-- end of wrapper div -->
 
 </div>
-
+<br>
+<center>
+<img src="miffy.png"/>
+</center>
 <!--
 <script>
 
