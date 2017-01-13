@@ -415,6 +415,7 @@ foreach( $url_qry_str as $param )
       if(substr($var[0],0,1) == "o") { $ops_arr[]=ceil($var[1]); };
       if(substr($var[0],0,1) == "d") { $dev_arr[]=ceil($var[1]); };
       if(substr($var[0],0,4) == "name") { $custName=urldecode($var[1]); };
+      if(substr($var[0],0,6) == "status") { $status=urldecode($var[1]); };
     }
 
 $areas = array(
@@ -429,9 +430,10 @@ $areas = array(
 ## Connect to the Database 
 connectDB();
 
-$qq = "INSERT IGNORE INTO data (client,o1,o2,o3,o4,o5,d1,d2,d3,d4,d5,hash,date) VALUES ('$custName',$ops_arr[0],$ops_arr[1],$ops_arr[2],$ops_arr[3],$ops_arr[4],$dev_arr[0],$dev_arr[1],$dev_arr[2],$dev_arr[3],$dev_arr[4],'$md5',NOW())";
-$result = mysqli_query($db, $qq);
-
+if ($status == "Completed") {
+	$qq = "INSERT IGNORE INTO data (client,o1,o2,o3,o4,o5,d1,d2,d3,d4,d5,hash,date) VALUES ('$custName',$ops_arr[0],$ops_arr[1],$ops_arr[2],$ops_arr[3],$ops_arr[4],$dev_arr[0],$dev_arr[1],$dev_arr[2],$dev_arr[3],$dev_arr[4],'$md5',NOW())";
+	$result = mysqli_query($db, $qq);
+}
 
 $o = $ops_arr[0];
 $d = $dev_arr[0];
@@ -765,7 +767,8 @@ array_push($workshops,$workshopLinks['OSEP']);
     </tr>
     </thead>
     <tbody>
-<?php 
+<?php
+######  ADD SECTION ON IMPACT STATEMENTS (SO WHAT?) ####### 
 $i=1;
 foreach ($analysis as $key => $answer) {
 echo "<tr><td>$i</td><td>$answer</td><td>$recommendations[$key]</td></tr>";
