@@ -126,13 +126,8 @@ able {
 <body>
 <?php
 ## Database stuff
-$db = mysqli_connect('172.30.132.205','adminzvJZccK','5Et6HuymAm_j');
-	if (!$db) {
-	die("Unable to connect to database");
-	}
-if (!mysqli_select_db($db, 'spider')) {
-		die("Unable to access spider database");
-	}
+include 'dbconnect.php';
+connectDB();
 ?>
                    <table class="bordered">
     <thead>
@@ -154,33 +149,58 @@ if (!mysqli_select_db($db, 'spider')) {
     </thead>
     <tbody>
 <?php
+
+function checkScores($oldScore,$newScore,$oldClient,$newClient) {
+if ($newScore != $oldScore && $oldClient == $newClient) {
+	$str = "<font color=red><b>$newScore</b></font>";
+	} else {
+	$str = "$newScore";
+	}
+return $str;
+}
 $qq = "SELECT * FROM data ORDER BY client,date DESC";
-$result = mysqli_query($db, $qq);
+$result = mysql_query($qq);
 $prevClient = "QQQQQQQQQQQQQQQQQ";
-while ($row = mysqli_fetch_assoc($result)) {
-if ($row['client'] != $prevClient) { 
-$col = "id=new";
-$comment = "(Most Recent)";
-} else {
-$col = "";
-$comment = "";
+$oldRowD1 = $oldRowD2 = $oldRowD3 = $oldRowD4 = $oldRowD5 = $oldRowO1 = $oldRowO2 = $oldRowO3 = $oldRowO4 = $oldRowO5 = "X";
+while ($row = mysql_fetch_assoc($result)) {
+	if ($row['client'] != $prevClient) { 
+		$col = "id=new";
+		$comment = "(Most Recent)";
+	} else {
+		$col = "";
+		$comment = "";
 }
 echo "<tr $col><td> $row[client] $comment</td>
-<td>$row[d1]</td>
-<td>$row[o1]</td>
-<td>$row[d2]</td>
-<td>$row[o2]</td>
-<td>$row[d3]</td>
-<td>$row[o3]</td>
-<td>$row[d4]</td>
-<td>$row[o4]</td>
-<td>$row[d5]</td>
-<td>$row[o5]</td>
+<td>" . checkScores($oldRowD1,$row['d1'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowO1,$row['o1'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowD2,$row['d2'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowO2,$row['o2'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowD3,$row['d3'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowO3,$row['o3'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowD4,$row['d4'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowO4,$row['o4'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowD5,$row['d5'],$prevClient,$row['client']) . "</td>
+<td>" . checkScores($oldRowO5,$row['o5'],$prevClient,$row['client']) . "</td>
 <td>$row[date]</td>
-<td align=center><a target=_blank href='index.php?name=$row[client]&d1=$row[d1]&o1=$row[o1]&d2=$row[d2]&o2=$row[o2]&d3=$row[d3]&o3=$row[o3]&d4=$row[d4]&o4=$row[o4]&d5=$row[d5]&o5=$row[o5]'><img src=icon.png></a></td>
+<td align=center><a target=_blank href='results.php?name=$row[client]&d1=$row[d1]&o1=$row[o1]&d2=$row[d2]&o2=$row[o2]&d3=$row[d3]&o3=$row[o3]&d4=$row[d4]&o4=$row[o4]&d5=$row[d5]&o5=$row[o5]'><img src=icon.png></a></td>
 </tr>";
 $prevClient = $row['client'];
-} 
+
+$oldRowD1 = $row['d1'];
+$oldRowD2 = $row['d2'];
+$oldRowD3 = $row['d3'];
+$oldRowD4 = $row['d4'];
+$oldRowD5 = $row['d5'];
+
+$oldRowO1 = $row['o1'];
+$oldRowO2 = $row['o2'];
+$oldRowO3 = $row['o3'];
+$oldRowO4 = $row['o4'];
+$oldRowO5 = $row['o5'];
+#}
+
+}
+ 
 ?>    
     
     

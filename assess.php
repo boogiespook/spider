@@ -9,7 +9,7 @@ session_start();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> -->
 
 <!--	<script src="js/jquery-1.10.2.js"></script>-->
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -72,17 +72,14 @@ session_start();
       	left: 100; 
       	visibility: hidden; 
       	} 
-      	
-legend {
 
-}
 
 p { font-family: 'Inder', sans-serif; line-height: 28px; margin-bottom: 15px; color: #666; }
 
 
 
 label {
-
+    color: #6E6363;
     display:inline-block;
 }
 input {
@@ -90,9 +87,19 @@ input {
   margin: 10px;
 } 	
 
-h3 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
+h3 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 20px; font-weight: 400; line-height: 32px; margin: 0 0 14px; }
 
-
+input[type=submit] {
+    padding:0px 10px;
+    width: 135px;
+ height: 205x;
+    font-size:20px; 
+    background:#EE6363; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
 
     </style>		
     
@@ -164,7 +171,7 @@ $userId = $_SESSION['usr_id'];
 
 <p><b>AIM</b>: To identify next steps, using follow-up sessions from Red Hat Consulting to do in depth studies</p>
 <br>
-To complete the assessment, please use the tabs and check the comment which better suits your environment.  Once complete, click "Submit" from the Submit Tab.
+<p>To complete the assessment, please use the tabs and check the comment which better suits your environment.  Once complete, click "Submit" from the Submit Tab.</p>
   </div>
   <div id="tabs-2">
     <p>
@@ -209,21 +216,21 @@ To complete the assessment, please use the tabs and check the comment which bett
 <div class="widget"> 
   <fieldset>
     <legend>Development</legend>
-<p><input class="w3-radio" type="radio" name="d1" id="radio-1" value="0" checked> <label>Ad-hoc tool selection</label></p>
-<p><input class="w3-radio" type="radio" name="d1" id="radio-1" value="1"> <label>Manual deployment (App + OS)</label></p>
-<p><input class="w3-radio" type="radio" name="d1" id="radio-1" value="2"> <label>CI/CD for non-production</label></p>
-<p><input class="w3-radio" type="radio" name="d1" id="radio-1" value="3"> <label>CD Pipelines capable of pushing to production</label></p>
-<p><input class="w3-radio" type="radio" name="d1" id="radio-1" value="4"> <label>> 90% of projects developed using agile development techniques</label></p>
+<input class="w3-radio" type="radio" name="d1" id="radio-1" value="0" checked> <label>Ad-hoc tool selection</label><br>
+<input class="w3-radio" type="radio" name="d1" id="radio-1" value="1"> <label>Manual deployment (App + OS)</label><br>
+<input class="w3-radio" type="radio" name="d1" id="radio-1" value="2"> <label>CI/CD for non-production</label><br>
+<input class="w3-radio" type="radio" name="d1" id="radio-1" value="3"> <label>CD Pipelines capable of pushing to production</label><br>
+<input class="w3-radio" type="radio" name="d1" id="radio-1" value="4"> <label>> 90% of projects developed using agile development techniques</label><br>
 
   </fieldset>
  
   <fieldset>
     <legend>Operations</legend>
-<p><input class="w3-radio" type="radio" name="o1" id="radio-1" value="0" checked> <label>Core build for OS only Basic (manual) provisioning</label></p>
-<p><input class="w3-radio" type="radio" name="o1" id="radio-1" value="1"> <label>Patch & Release management (OS)</label></p>
-<p><input class="w3-radio" type="radio" name="o1" id="radio-1" value="2"> <label>QA staging process SOE</label></p>
-<p><input class="w3-radio" type="radio" name="o1" id="radio-1" value="3"> <label>Automated OS Builds</label></p>
-<p><input class="w3-radio" type="radio" name="o1" id="radio-1" value="4"> <label>> 90% of infrastructure is automatically provisioned and managed</label></p>
+<input class="w3-radio" type="radio" name="o1" id="radio-1" value="0" checked> <label>Core build for OS only Basic (manual) provisioning</label><br>
+<input class="w3-radio" type="radio" name="o1" id="radio-1" value="1"> <label>Patch & Release management (OS)</label><br>
+<input class="w3-radio" type="radio" name="o1" id="radio-1" value="2"> <label>QA staging process SOE</label><br>
+<input class="w3-radio" type="radio" name="o1" id="radio-1" value="3"> <label>Automated OS Builds</label><br>
+<input class="w3-radio" type="radio" name="o1" id="radio-1" value="4"> <label>> 90% of infrastructure is automatically provisioned and managed</label><br>
   </fieldset> 
  
 </div>    
@@ -232,41 +239,41 @@ To complete the assessment, please use the tabs and check the comment which bett
   <div id="tabs-4">
   <fieldset>
     <legend>Development</legend>
-<p><input class="w3-radio" type="radio" name="d2" id="radio-2" value="0" checked> <label>No defined methodology</label></p>
-<p><input class="w3-radio" type="radio" name="d2" id="radio-2" value="1"> <label>Defined waterfall approach</label></p>
-<p><input class="w3-radio" type="radio" name="d2" id="radio-2" value="2"> <label>Limited agile development on new projects (not including operations)</label></p>
-<p><input class="w3-radio" type="radio" name="d2" id="radio-2" value="3"> <label>Agile development through to production & ops</label></p>
-<p><input class="w3-radio" type="radio" name="d2" id="radio-2" value="4"> <label>Full DevOps culture</label></p>
+<input class="w3-radio" type="radio" name="d2" id="radio-2" value="0" checked> <label>No defined methodology</label><br>
+<input class="w3-radio" type="radio" name="d2" id="radio-2" value="1"> <label>Defined waterfall approach</label><br>
+<input class="w3-radio" type="radio" name="d2" id="radio-2" value="2"> <label>Limited agile development on new projects (not including operations)</label><br>
+<input class="w3-radio" type="radio" name="d2" id="radio-2" value="3"> <label>Agile development through to production & ops</label><br>
+<input class="w3-radio" type="radio" name="d2" id="radio-2" value="4"> <label>Full DevOps culture</label><br>
 
   </fieldset>
  
   <fieldset>
     <legend>Operations</legend>
-<p><input class="w3-radio" type="radio" name="o2" id="radio-2" value="0" checked> <label>Hosting/Mgmt Only</label></p>
-<p><input class="w3-radio" type="radio" name="o2" id="radio-2" value="1"> <label>Defined SLAs + ITIL</label></p>
-<p><input class="w3-radio" type="radio" name="o2" id="radio-2" value="2"> <label>Compliance & Security Auditing</label></p>
-<p><input class="w3-radio" type="radio" name="o2" id="radio-2" value="3"> <label>SOE</label></p>
-<p><input class="w3-radio" type="radio" name="o2" id="radio-2" value="4"> <label>Full DevOps culture</label></p>
+<input class="w3-radio" type="radio" name="o2" id="radio-2" value="0" checked> <label>Hosting/Mgmt Only</label><br>
+<input class="w3-radio" type="radio" name="o2" id="radio-2" value="1"> <label>Defined SLAs + ITIL</label><br>
+<input class="w3-radio" type="radio" name="o2" id="radio-2" value="2"> <label>Compliance & Security Auditing</label><br>
+<input class="w3-radio" type="radio" name="o2" id="radio-2" value="3"> <label>SOE</label><br>
+<input class="w3-radio" type="radio" name="o2" id="radio-2" value="4"> <label>Full DevOps culture</label><br>
   </fieldset> 
 
   </div>
   <div id="tabs-5">
   <fieldset>
     <legend>Development</legend>
-<p><input class="w3-radio" type="radio" name="d3" id="radio-3" value="0" checked> <label>Ad-hoc choice of application dev tools. Very limited understand of new architectures and approaches to application deployment</label></p>
-<p><input class="w3-radio" type="radio" name="d3" id="radio-3" value="1"> <label>Selected vendor tech roadmap. Initial understanding of new architectures and designs</label></p>
-<p><input class="w3-radio" type="radio" name="d3" id="radio-3" value="2"> <label>Iterative development of existing applications Limited legacy strategy and beginnings of new development architectures</label></p>
-<p><input class="w3-radio" type="radio" name="d3" id="radio-3" value="3"> <label>Focus on new platforms & limited legacy platforms. Well defined architecture for new development projects and operating models</label></p>
-<p><input class="w3-radio" type="radio" name="d3" id="radio-3" value="4"> <label>Holistic & defined overall development strategy. Good designs and architectures in place and under regular review</label></p>
+<input class="w3-radio" type="radio" name="d3" id="radio-3" value="0" checked> <label>Ad-hoc choice of application dev tools. Very limited understand of new architectures and approaches to application deployment</label><br>
+<input class="w3-radio" type="radio" name="d3" id="radio-3" value="1"> <label>Selected vendor tech roadmap. Initial understanding of new architectures and designs</label><br>
+<input class="w3-radio" type="radio" name="d3" id="radio-3" value="2"> <label>Iterative development of existing applications Limited legacy strategy and beginnings of new development architectures</label><br>
+<input class="w3-radio" type="radio" name="d3" id="radio-3" value="3"> <label>Focus on new platforms & limited legacy platforms. Well defined architecture for new development projects and operating models</label><br>
+<input class="w3-radio" type="radio" name="d3" id="radio-3" value="4"> <label>Holistic & defined overall development strategy. Good designs and architectures in place and under regular review</label><br>
   </fieldset>
  
   <fieldset>
     <legend>Operations</legend>
-<p><input class="w3-radio" type="radio" name="o3" id="radio-3" value="0" checked> <label>Ad-hoc choice of future platforms</label></p>
-<p><input class="w3-radio" type="radio" name="o3" id="radio-3" value="1"> <label>Selected vendor tech roadmap</label></p>
-<p><input class="w3-radio" type="radio" name="o3" id="radio-3" value="2"> <label>Focus on maintaining existing infrastructure</label></p>
-<p><input class="w3-radio" type="radio" name="o3" id="radio-3" value="3"> <label>Primary focus on new applications</label></p>
-<p><input class="w3-radio" type="radio" name="o3" id="radio-3" value="4"> <label>Defined strategy for existing and new architectures</label></p>
+<input class="w3-radio" type="radio" name="o3" id="radio-3" value="0" checked> <label>Ad-hoc choice of future platforms</label><br>
+<input class="w3-radio" type="radio" name="o3" id="radio-3" value="1"> <label>Selected vendor tech roadmap</label><br>
+<input class="w3-radio" type="radio" name="o3" id="radio-3" value="2"> <label>Focus on maintaining existing infrastructure</label><br>
+<input class="w3-radio" type="radio" name="o3" id="radio-3" value="3"> <label>Primary focus on new applications</label><br>
+<input class="w3-radio" type="radio" name="o3" id="radio-3" value="4"> <label>Defined strategy for existing and new architectures</label><br>
 
   </fieldset> 
 
@@ -275,40 +282,40 @@ To complete the assessment, please use the tabs and check the comment which bett
   <div id="tabs-6">
   <fieldset>
     <legend>Development</legend>
-<p><input class="w3-radio" type="radio" name="d4" id="radio-4" value="0" checked> <label>The business dictates requirements, strategy and deliverables</label></p>
-<p><input class="w3-radio" type="radio" name="d4" id="radio-4" value="1"> <label>Mature requirements gathering approach (e.g. Agile user stories)</label></p>
-<p><input class="w3-radio" type="radio" name="d4" id="radio-4" value="2"> <label>MVP approach</label></p>
-<p><input class="w3-radio" type="radio" name="d4" id="radio-4" value="3"> <label>Multiple projects against business needs</label></p>
-<p><input class="w3-radio" type="radio" name="d4" id="radio-4" value="4"> <label>IT driven business innovation. IT working directly with business requirements.</label></p>
+<input class="w3-radio" type="radio" name="d4" id="radio-4" value="0" checked> <label>The business dictates requirements, strategy and deliverables</label><br>
+<input class="w3-radio" type="radio" name="d4" id="radio-4" value="1"> <label>Mature requirements gathering approach (e.g. Agile user stories)</label><br>
+<input class="w3-radio" type="radio" name="d4" id="radio-4" value="2"> <label>MVP approach</label><br>
+<input class="w3-radio" type="radio" name="d4" id="radio-4" value="3"> <label>Multiple projects against business needs</label><br>
+<input class="w3-radio" type="radio" name="d4" id="radio-4" value="4"> <label>IT driven business innovation. IT working directly with business requirements.</label><br>
   </fieldset>
  
   <fieldset>
     <legend>Operations</legend>
-<p><input class="w3-radio" type="radio" name="o4" id="radio-4" value="0" checked> <label>Instances of negative business impact</label></p>
-<p><input class="w3-radio" type="radio" name="o4" id="radio-4" value="1"> <label>Good functioning service operations (i.e few unscheduled outage but slow to deploy)</label></p>
-<p><input class="w3-radio" type="radio" name="o4" id="radio-4" value="2"> <label>Project based service offerings (i.e no unscheduled outages and rapid deployment)</label></p>
-<p><input class="w3-radio" type="radio" name="o4" id="radio-4" value="3"> <label>Self sevice operations for development & the business</label></p>
-<p><input class="w3-radio" type="radio" name="o4" id="radio-4" value="4"> <label>Transparent integration with project IT</label></p>
+<input class="w3-radio" type="radio" name="o4" id="radio-4" value="0" checked> <label>Instances of negative business impact</label><br>
+<input class="w3-radio" type="radio" name="o4" id="radio-4" value="1"> <label>Good functioning service operations (i.e few unscheduled outage but slow to deploy)</label><br>
+<input class="w3-radio" type="radio" name="o4" id="radio-4" value="2"> <label>Project based service offerings (i.e no unscheduled outages and rapid deployment)</label><br>
+<input class="w3-radio" type="radio" name="o4" id="radio-4" value="3"> <label>Self sevice operations for development & the business</label><br>
+<input class="w3-radio" type="radio" name="o4" id="radio-4" value="4"> <label>Transparent integration with project IT</label><br>
   </fieldset> 
   </div>
   <div id="tabs-7">
   <fieldset>
     <legend>Development</legend>
-<p><input class="w3-radio" type="radio" name="d5" id="radio-5" value="0" checked> <label>Traditional programming techniques with No agreed tools</label></p>
-<p><input class="w3-radio" type="radio" name="d5" id="radio-5" value="1"> <label>Initial agile adoption with 1 backlog per team</label></p>
-<p><input class="w3-radio" type="radio" name="d5" id="radio-5" value="2"> <label>Extended team collaboration. Common DevOps skills</label></p>
-<p><input class="w3-radio" type="radio" name="d5" id="radio-5" value="3"> <label>Continous cross-team improvement and collaboration</label></p>
-<p><input class="w3-radio" type="radio" name="d5" id="radio-5" value="4"> <label>100% DevOps projects with Full cross-functional teams</label></p>
+<input class="w3-radio" type="radio" name="d5" id="radio-5" value="0" checked> <label>Traditional programming techniques with No agreed tools</label><br>
+<input class="w3-radio" type="radio" name="d5" id="radio-5" value="1"> <label>Initial agile adoption with 1 backlog per team</label><br>
+<input class="w3-radio" type="radio" name="d5" id="radio-5" value="2"> <label>Extended team collaboration. Common DevOps skills</label><br>
+<input class="w3-radio" type="radio" name="d5" id="radio-5" value="3"> <label>Continous cross-team improvement and collaboration</label><br>
+<input class="w3-radio" type="radio" name="d5" id="radio-5" value="4"> <label>100% DevOps projects with Full cross-functional teams</label><br>
 
   </fieldset>
  
   <fieldset>
     <legend>Operations</legend>
-<p><input class="w3-radio" type="radio" name="o5" id="radio-5" value="0" checked> <label>Standard Unix-like skills & no scripting skills</label></p>
-<p><input class="w3-radio" type="radio" name="o5" id="radio-5" value="0"> <label>Direct VM interaction but limited scripting and manual interaction.</label></p>
-<p><input class="w3-radio" type="radio" name="o5" id="radio-5" value="0"> <label>Dynamic templated images</label></p>
-<p><input class="w3-radio" type="radio" name="o5" id="radio-5" value="0"> <label>Fully automated & deployment skills</label></p>
-<p><input class="w3-radio" type="radio" name="o5" id="radio-5" value="0"> <label>100% DevOps engineers</label></p>
+<input class="w3-radio" type="radio" name="o5" id="radio-5" value="0" checked> <label>Standard Unix-like skills & no scripting skills</label><br>
+<input class="w3-radio" type="radio" name="o5" id="radio-5" value="1"> <label>Direct VM interaction but limited scripting and manual interaction.</label><br>
+<input class="w3-radio" type="radio" name="o5" id="radio-5" value="2"> <label>Dynamic templated images</label><br>
+<input class="w3-radio" type="radio" name="o5" id="radio-5" value="3"> <label>Fully automated & deployment skills</label><br>
+<input class="w3-radio" type="radio" name="o5" id="radio-5" value="4"> <label>100% DevOps engineers</label><br>
   </fieldset> 
   </div>
 <!--  <div id="tabs-8">

@@ -1,0 +1,294 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ready to Innovate?</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" >
+	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
+
+<!--	<script src="js/jquery-1.10.2.js"></script>-->
+<script type="text/javascript">
+var currentLayer = 'page1';
+function showLayer(lyr){
+	hideLayer(currentLayer);
+	document.getElementById(lyr).style.visibility = 'visible';
+	currentLayer = lyr;
+}
+
+function hideLayer(lyr){
+	document.getElementById(lyr).style.visibility = 'hidden';
+}
+function showValues(form){
+	var values = '';
+	var len = form.length - 1; //Leave off Submit Button
+	for(i=0; i<len; i++){
+		if(form[i].id.indexOf("C")!=-1||form[i].id.indexOf("B")!=-1)//Skip Continue and Back Buttons
+			continue;
+		values += form[i].id;
+		values += ': ';
+		values += form[i].value;
+		values += '\n';
+	}
+	alert(values);
+}
+</script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css" />
+   <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="js/datatables.min.js"></script>
+
+   <script type="text/javascript" src="js/jquery.timepicker.js"> </script>
+   <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+   <link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css" />   
+   <style>
+      #locationField, #controls {
+        position: relative;
+        width: 480px;
+      }
+      #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+      }
+      .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+      }
+      #address {
+        border: 1px solid #000090;
+        background-color: #f0f0ff;
+        width: 480px;
+        padding-right: 2px;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+      }
+      .page { position: absolute; 
+      	top: 10; 
+      	left: 100; 
+      	visibility: hidden; 
+      	} 
+      	
+     form {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  width: 240px;
+}
+
+*:before,
+*:after {
+   box-sizing: border-box;
+}
+
+input {
+  border-radius: 5px;
+  margin: 0;
+} 	
+label{
+    display:inline-block;
+}
+
+input[type="checkbox"] {
+    display:none;
+}
+
+input[type="checkbox"] + label {
+    color:#2d3e4c;
+}
+
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-2px 10px 0 0;
+    vertical-align:middle;
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
+}
+
+    </style>		
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.php"><img src="images/innovate.png">  Ready to Innovate?</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navbar1">
+			<ul class="nav navbar-nav navbar-right">
+				<?php if (isset($_SESSION['usr_id'])) { ?>
+				<li><p class="navbar-text">Signed in as <?php echo $_SESSION['usr_name']; ?></p></li>
+				<li><a href="logout.php">Log Out</a></li>
+				<?php } else { ?>
+				<li><a href="login.php">Login</a></li>
+				<li><a href="register.php">Sign Up</a></li>
+				<?php } ?>
+
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<?php
+if(isset($_SESSION['usr_id'])) {
+include 'dbconnect.php';
+$userId = $_SESSION['usr_id'];
+
+?>
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+<!--      <div class="jumbotron"> -->
+<form id="multipage" method="POST" action="javascript:void(0)" onSubmit="showValues(this)">
+<div id="page1" class="page" style="visibility:visible;">
+  <p><label>Customer Name</label><input type="text" id="customerName" size="20"></p>
+<p><label>Region</label>
+<select name="region">
+<option value=DA>DA</option>
+<option value=CH>CH</option>
+<option value=Benelux>Benelux</option>
+<option value=UKI>UKI</option>
+<option value=Nordics>Nordics</option>
+<option value=CEE>CEE</option>
+<option value=CIS>CIS</option>
+<option value=France>France</option>
+<option value=ICG>ICG</option>
+<option value=Italy>Italy</option>
+<option value=Iberia>Iberia</option>
+<option value=MENA>MENA</option>
+<option value=Turkey>Turkey</option>
+</select>
+  </p>
+<p><label>Domain</label>
+<select name="domain">
+<option value=Government>Government</option>
+<option value=Finance>Finance</option>
+<option value=Retail>Retail</option>
+<option value=Manufacturing>Manufacturing</option>
+<option value=Health>Health</option>
+<option value=Media>Media</option>
+<option value=Telecoms>Telecoms</option>
+<option value=Energy>Energy</option>
+</select>
+  </p>
+  
+  <p><input type="button" id="C1" value="Continue" onClick="showLayer('page2')"></p>
+</div>
+<div id="page2" class="page">
+<h3>Automation</h3>
+<h4>Development</h4>
+<p><input type="radio" name="d1" value="0" /><label><span>Ad-hoc tool selection</span></label></p>
+<p><input type="radio" name="d1" value="1" /><label>><span>Manual deployment (App + OS)</span></label></p>
+<p><input type="radio" name="d1" value="2" /><label><span>CI/CD for non-production</span></label></p>
+<p><input type="radio" name="d1" value="3" /><label><span>CD Pipelines capable of pushing to production</span></label></p>
+<p><input type="radio" name="d1" value="4" /><label><span>90% of projects developed using agile development techniques </span></label></p>
+  <p><input type="button" id="B1" value="Go Back" onClick="showLayer('page1')"><input type="button" id="C2" value="Continue" onClick="showLayer('page3')"></p>
+</div>
+<div id="page3" class="page">
+<h3>Automation</h3>
+<h4>Operations</h4>
+<p><input type="radio" name="o1" value="0" /><label for="o1"><span>Core build for OS only Basic (manual) provisioning</span></label></p>
+<p><input type="radio" name="o1" value="1" /><label for="o1"><span>Patch & Release management (OS)</span></label></p>
+<p><input type="radio" name="o1" value="2" /><label for="o1"><span>QA staging process SOE</span></label></p>
+<p><input type="radio" name="o1" value="3" /><label for="o1"><span>Automated OS Builds</span></label></p>
+<p><input type="radio" name="o1" value="4" /><label for="o1"><span>> 90% of infrastructure is automatically provisioned and managed</span></label></p>
+  <p><input type="button" id="B1" value="Go Back" onClick="showLayer('page2')"><input type="button" id="C2" value="Continue" onClick="showLayer('page4')"></p>
+  </div>
+
+<div id="page4" class="page">
+<h3>Methodology</h3>
+<h4>Development</h4>
+<p><input type="radio" name="d2" value="0" /><label for="o1"><span></span></label></p>
+<p><input type="radio" name="d2" value="1" /><label for="o1"><span></span></label></p>
+<p><input type="radio" name="d2" value="2" /><label for="o1"><span></span></label></p>
+<p><input type="radio" name="d2" value="3" /><label for="o1"><span></span></label></p>
+<p><input type="radio" name="d2" value="4" /><label for="o1"><span></span></label></p>
+  <p><input type="button" id="B1" value="Go Back" onClick="showLayer('page3')"><input type="button" id="C2" value="Continue" onClick="showLayer('page5')"></p>
+  </div>
+
+<div id="page5" class="page">
+<h3>Methodology</h3>
+<h4>Operations</h4>
+<p><input type="radio" name="o2" value="0" /><label for="o1"><span></span></label></p>
+<p><input type="radio" name="o2" value="1" /><label for="o1"><span></span></label></p>
+<p><input type="radio" name="o2" value="2" /><label for="o1"><span></span></label></p>
+<p><input type="radio" name="o2" value="3" /><label for="o1"><span></span></label></p>
+<p><input type="radio" name="o2" value="4" /><label for="o1"><span></span></label></p>
+  <p><input type="button" id="B1" value="Go Back" onClick="showLayer('page4')"><input type="submit" value="Submit"></p>
+  </div>
+
+
+</form>
+
+      </div>
+
+
+    </div> <!-- /container -->
+<?php    }
+####  End of Logged on bit ######
+?>
+ 
+
+
+
+	<script type="text/javascript" charset="utf-8">
+$('#reg-form').submit(function(e){
+		
+    e.preventDefault(); // Prevent Default Submission
+		
+    $.ajax({
+	url: 'submit.php',
+	type: 'POST',
+	data: $(this).serialize(), // it will serialize the form data
+        dataType: 'html'
+    })
+    .done(function(data){
+	    $('#form-content').fadeOut('slow', function(){
+	         $('#form-content').fadeIn('slow').html(data);
+        });
+    })
+    .fail(function(){
+	alert('Ajax Submit Failed ...');	
+    });
+});		
+	</script>
+
+</body>
+</html>
+

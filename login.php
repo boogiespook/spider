@@ -5,16 +5,21 @@ if(isset($_SESSION['usr_id'])!="") {
 	header("Location: assess.php");
 }
 
-include_once 'dbconnect.php';
-
 //check if form is submitted
 if (isset($_POST['login'])) {
 
 #	$email = mysql_real_escape_string($con, $_POST['email']);
 #	$password = mysql_real_escape_string($con, $_POST['password']);
 #	$result = mysql_query($con, "SELECT * FROM users WHERE email = '" . $email. "' and password = '" . md5($password) . "'");
-	$email = mysql_real_escape_string($_POST['email']);
-	$password = mysql_real_escape_string($_POST['password']);
+#	$email = mysql_real_escape_string($_POST['email']);
+#	$password = mysql_real_escape_string($_POST['password']);
+#	$result = mysql_query("SELECT * FROM users WHERE email = '" . $email. "' and password = '" . md5($password) . "'");
+
+include 'dbconnect.php';
+connectDB();
+
+	$email = $_POST['email'];
+	$password = $_POST['password'];
 	$result = mysql_query("SELECT * FROM users WHERE email = '" . $email. "' and password = '" . md5($password) . "'");
 
 	if ($row = mysql_fetch_array($result)) {
@@ -30,7 +35,7 @@ if (isset($_POST['login'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>TrainDiary</title>
+	<title>Ready to Innovate?</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" >
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 </head>
