@@ -55,7 +55,7 @@ height: 50px;
 table {
     *border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
-    width: 100%;    
+    width: 100%;
 }
 
 .bordered {
@@ -63,9 +63,9 @@ table {
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
-    -webkit-box-shadow: 0 1px 1px #ccc; 
-    -moz-box-shadow: 0 1px 1px #ccc; 
-    box-shadow: 0 1px 1px #ccc;         
+    -webkit-box-shadow: 0 1px 1px #ccc;
+    -moz-box-shadow: 0 1px 1px #ccc;
+    box-shadow: 0 1px 1px #ccc;
 }
 
 .bordered tr:hover {
@@ -74,14 +74,14 @@ table {
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;     
-}    
-    
+    transition: all 0.1s ease-in-out;
+}
+
 .bordered td, .bordered th {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
     padding: 10px;
-    text-align: left;    
+    text-align: left;
 }
 
 .bordered th {
@@ -92,11 +92,11 @@ table {
     background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
     background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
     background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
-    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
     border-top: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
 
 .bordered td:first-child, .bordered th:first-child {
@@ -139,33 +139,33 @@ table {
 
 .zebra td, .zebra th {
     padding: 10px;
-    border-bottom: 1px solid #f2f2f2;    
+    border-bottom: 1px solid #f2f2f2;
 }
 
 .zebra tbody tr:nth-child(even) {
     background: #f5f5f5;
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
-    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
 }
 
 .zebra th {
     text-align: left;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
     border-bottom: 1px solid #ccc;
     background-color: #eee;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#eee));
     background-image: -webkit-linear-gradient(top, #f5f5f5, #eee);
     background-image:    -moz-linear-gradient(top, #f5f5f5, #eee);
     background-image:     -ms-linear-gradient(top, #f5f5f5, #eee);
-    background-image:      -o-linear-gradient(top, #f5f5f5, #eee); 
+    background-image:      -o-linear-gradient(top, #f5f5f5, #eee);
     background-image:         linear-gradient(top, #f5f5f5, #eee);
 }
 
 .zebra th:first-child {
     -moz-border-radius: 6px 0 0 0;
     -webkit-border-radius: 6px 0 0 0;
-    border-radius: 6px 0 0 0;  
+    border-radius: 6px 0 0 0;
 }
 
 .zebra th:last-child {
@@ -183,7 +183,7 @@ table {
 .zebra tfoot td {
     border-bottom: 0;
     border-top: 1px solid #fff;
-    background-color: #f1f1f1;  
+    background-color: #f1f1f1;
 }
 
 .zebra tfoot td:first-child {
@@ -203,7 +203,7 @@ table {
     -webkit-border-radius: 0 0 6px 6px
     border-radius: 0 0 6px 6px
 }
-  
+
 </style>
 
 
@@ -225,7 +225,7 @@ table {
       },
       minWidth: 1000
     });
- 
+
     $( "#analysis-opener" ).on( "click", function() {
       $( "#analysis-dialog" ).dialog( "open" );
     });
@@ -246,7 +246,7 @@ table {
       },
       minWidth: 400
     });
- 
+
     $( "#workshop-opener" ).on( "click", function() {
       $( "#workshop-dialog" ).dialog( "open" );
     });
@@ -256,8 +256,8 @@ table {
 </head>
 
 <body>
-      <div id="rh-logo">      
-<img src="shadowman_very_small.png" />      
+      <div id="rh-logo">
+<img src="shadowman_very_small.png" />
       </div>
 <?php  date_default_timezone_set("Europe/London"); ?>
       <div id="wrapper">
@@ -268,13 +268,13 @@ table {
       <h2>Ready to Innovate Assessment for <?php echo $_GET['name']; ?></h2>
       </center>
       </header>
-      
-<div id="content">       
+
+<div id="content">
     <div style="width:90%">
         <canvas id="canvas"></canvas>
     </div>
         <script>
-        
+
     function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
@@ -284,7 +284,7 @@ table {
                if(pair[0] == variable){return decodeURI(pair[1]);}
        }
        return(false);
-}    
+}
 
     var customerName = getQueryVariable("name")
 
@@ -305,7 +305,7 @@ table {
 
     var chartTitle = "DevOps Chart - " + customerName
 
-    
+
     var randomScalingFactor = function() {
         return Math.round(Math.random() * 4);
     };
@@ -339,7 +339,7 @@ table {
                 text: chartTitle
             },
             scale: {
-            
+
               ticks: {
                 beginAtZero: true,
                 max: 4,
@@ -364,7 +364,7 @@ table {
                    <table class="bordered">
     <thead>
     <tr>
-        <th>Area</th>        
+        <th>Area</th>
         <th>Development Rating</th>
         <th>Operations Rating</th>
     </tr>
@@ -428,7 +428,7 @@ $areas = array(
 );
 
 
-## Connect to the Database 
+## Connect to the Database
 connectDB();
 
 if ($status == "Completed") {
@@ -444,8 +444,8 @@ echo "    <tr>
         <td>Automation</td>
         <td><b>$dev_arr[0]</b> - $automation_dev_array[$d] </td>
         <td><b>$ops_arr[0]</b> - $automation_ops_array[$o] </td>
-    </tr>";        
-    
+    </tr>";
+
 $o = $ops_arr[1];
 $d = $dev_arr[1];
 $totalDev += $d;
@@ -455,7 +455,7 @@ echo "    <tr>
         <td>Methodology</td>
         <td><b>$dev_arr[1]</b> - $methodology_dev_array[$d] </td>
         <td><b>$ops_arr[1]</b> - $methodology_ops_array[$o] </td>
-    </tr>";        
+    </tr>";
 
 $o = $ops_arr[2];
 $d = $dev_arr[2];
@@ -465,8 +465,8 @@ echo "    <tr>
         <td>Architecture</td>
         <td><b>$dev_arr[2]</b> - $strategy_dev_array[$d] </td>
         <td><b>$ops_arr[2]</b> - $strategy_ops_array[$o] </td>
-    </tr>";        
-    
+    </tr>";
+
 $o = $ops_arr[3];
 $d = $dev_arr[3];
 $totalDev += $d;
@@ -475,18 +475,18 @@ echo "    <tr>
         <td>Strategy</td>
         <td><b>$dev_arr[3]</b> - $influence_dev_array[$d] </td>
         <td><b>$ops_arr[3]</b> - $influence_ops_array[$o] </td>
-    </tr>";      
-    
+    </tr>";
+
 $o = $ops_arr[4];
 $d = $dev_arr[4];
 $totalDev += $d;
-$totalOps += $o;      
+$totalOps += $o;
 echo "    <tr>
         <td>Resources</td>
         <td><b>$dev_arr[4]</b> - $resources_dev_array[$d] </td>
         <td><b>$ops_arr[4]</b> - $resources_ops_array[$o] </td>
-    </tr>";        
-  
+    </tr>";
+
 $analysis = $recommendations = array();
 
 ## Assess Dev vs Ops
@@ -514,7 +514,7 @@ case ($var > 1 && $var < 3):
 case ($var > 3):
    $rating = "very good";
    break;
-}	
+}
 return $rating;
 }
 
@@ -532,7 +532,7 @@ case ($var > 4 && $var < 7):
 case ($var > 7):
    $rating = "very good";
    break;
-}	
+}
 return $rating;
 }
 
@@ -567,7 +567,7 @@ if ($ops_arr[0]  > 2) {
 	if ($dev_arr[0] < 2) {
 		$automationAnalysis .= " although less automation is used by the Dev team";
 		$automationRecommendation = "Increase automation in the Dev team";
-		array_push($workshops,$workshopLinks['BusinessAutomation']);		
+		array_push($workshops,$workshopLinks['BusinessAutomation']);
 	}
 	if ($dev_arr[0] > 2) {
 		$automationAnalysis .= " which is similar to the Dev team";
@@ -622,7 +622,7 @@ if($opsStrategy > $devStrategy) {
 	$strategyAnalysis .= " although the Operations team are more mature than the Development team.";
 	$strategyRecommendations .= "Strategy and Business Influence Workshop";
 	array_push($workshops,"Strategy and Business Influence Workshop");
-	array_push($workshops,"Business Influence Mapping");	
+	array_push($workshops,"Business Influence Mapping");
 } elseif ($opsStrategy < $devStrategy) {
 	$strategyAnalysis .= " although the Development team are more mature than the Operations team.";
 	$strategyRecommendations .= "Strategy and Business Influence Workshop";
@@ -633,9 +633,9 @@ if($opsStrategy > $devStrategy) {
 
 if ($overallStrategy <= 2) {
 	$strategyRecommendations .= "Open Innovation Lab & Strategy and Business Influence Workshop";
-	array_push($workshops,$workshopLinks['InnovationLabs']);	
-	array_push($workshops,$workshopLinks['BusinessInfluence']);	
-	array_push($workshops,"Business Influence Mapping");	
+	array_push($workshops,$workshopLinks['InnovationLabs']);
+	array_push($workshops,$workshopLinks['BusinessInfluence']);
+	array_push($workshops,"Business Influence Mapping");
 }
 
 array_push($recommendations,$strategyRecommendations);
@@ -651,28 +651,28 @@ $methodsAnalysis = "The overall methodology score is " . assessOverallVals($over
 if($opsMethods > $devMethods) {
 	$methodsAnalysis .= " although the Operations team have more mature methodology than the Development team.";
 	$methodRecommendations .= "Container Platforms & Agile Development";
-   array_push($workshops,$workshopLinks['ContainerPlatforms']);	
-   array_push($workshops,$workshopLinks['AgileDevelopment']);	
-     
+   array_push($workshops,$workshopLinks['ContainerPlatforms']);
+   array_push($workshops,$workshopLinks['AgileDevelopment']);
+
 } elseif ($opsMethods < $devMethods) {
 	$methodsAnalysis .= " although the Development team are more mature than the Operations team.";
 	$methodRecommendations .= "Standard Operating Environment Workshop";
-   array_push($workshops,$workshopLinks['AdaptiveSOE']);	
+   array_push($workshops,$workshopLinks['AdaptiveSOE']);
 } else {
 	$methodsAnalysis .= " and both teams have the same level of maturity.";
 	$methodRecommendations .= "";
 }
 
 if ($devMethods < 2) {
-   array_push($workshops,$workshopLinks['ContainerPlatforms']);	
-   array_push($workshops,$workshopLinks['AgileDevelopment']);	
+   array_push($workshops,$workshopLinks['ContainerPlatforms']);
+   array_push($workshops,$workshopLinks['AgileDevelopment']);
    $methodsAnalysis .= " The Dev team could be improved through the use of more agile methodologies";
 	$methodRecommendations .= "  Container Platforms and Agile Development coaching";
 }
 
 if ($overallMethods <= 2) {
 	$methodRecommendations .= "Open Innovation Lab";
-   array_push($workshops,$workshopLinks['InnovationLabs']);	
+   array_push($workshops,$workshopLinks['InnovationLabs']);
 
 }
 array_push($recommendations,$methodRecommendations);
@@ -723,23 +723,23 @@ $ArchsAnalysis = "The overall rating for architecture is " . assessOverallVals($
 if($opsArchs > $devArchs) {
 	$ArchsAnalysis .= " although the Operations team have a higher architecture rating than the Development team.";
 	$ArchRecommendations .= "Container Platforms <br> Agile Development.";
-   array_push($workshops,$workshopLinks['ContainerPlatforms']);	
-   array_push($workshops,$workshopLinks['AgileDevelopment']);	
-     
+   array_push($workshops,$workshopLinks['ContainerPlatforms']);
+   array_push($workshops,$workshopLinks['AgileDevelopment']);
+
 } elseif ($opsArchs < $devArchs) {
 	$ArchsAnalysis .= " although the Development team are more mature than the Operations team.";
 	$ArchRecommendations .= "Increase infrastructure management and cloud awareness.";
-   array_push($workshops,$workshopLinks['CloudInfrastructure']);	
-   array_push($workshops,$workshopLinks['CloudManagement']);	
+   array_push($workshops,$workshopLinks['CloudInfrastructure']);
+   array_push($workshops,$workshopLinks['CloudManagement']);
 } else {
 	$ArchsAnalysis .= " and both teams have the same level of maturity.";
 	$ArchRecommendations .= "";
 }
 
 if ($devArchs < 2) {
-   array_push($workshops,$workshopLinks['ContainerPlatforms']);	
-   array_push($workshops,$workshopLinks['AgileDevelopment']);	
-   array_push($workshops,$workshopLinks['Microservices']);	
+   array_push($workshops,$workshopLinks['ContainerPlatforms']);
+   array_push($workshops,$workshopLinks['AgileDevelopment']);
+   array_push($workshops,$workshopLinks['Microservices']);
    $ArchsAnalysis .= " The Dev team could be improved through the use of more agile based architectures and microservices";
 	$ArchRecommendations .= " Increase use of microservices";
 }
@@ -753,7 +753,7 @@ array_push($analysis,$ArchsAnalysis);
 if ($devStrategy < 3 && $opsStrategy < 3) {
 array_push($analysis,"Increase methodology and strategy through increased use of Open Source software");
 array_push($recommendations,"OSEP Workshop");
-array_push($workshops,$workshopLinks['OSEP']);	
+array_push($workshops,$workshopLinks['OSEP']);
 }
 
 ?>
@@ -769,7 +769,7 @@ array_push($workshops,$workshopLinks['OSEP']);
     </thead>
     <tbody>
 <?php
-######  ADD SECTION ON IMPACT STATEMENTS (SO WHAT?) ####### 
+######  ADD SECTION ON IMPACT STATEMENTS (SO WHAT?) #######
 $i=1;
 foreach ($analysis as $key => $answer) {
 echo "<tr><td>$i</td><td>$answer</td><td>$recommendations[$key]</td></tr>";
@@ -778,9 +778,47 @@ $i++;
 ?>
     </tbody>
     </table>
+<br>
+<div id="analysis-adoc">
+  <table class="bordered">
+    <thead>
+    <tr>
+        <th>Asciidoc Export:</th>
+    </tr>
+    </thead>
+    <tbody>
+<tr><td>
+  <?php
+  $i=1;
+  echo ".Analyse Results";
+  echo "<br>";
+  echo '[cols="1,10,10",options=header]';
+  echo "<br>";
+  echo '|===';
+  echo "<br>";
+  echo '<|ID <|Analysis <|Recommendations';
+  echo "<br>";
+  foreach ($analysis as $key => $answer) {
+    echo "<br>";
+    echo "|$i";
+    echo "<br>";
+    echo "|$answer";
+    echo "<br>";
+    echo "|$recommendations[$key]";
+    echo "<br>";
+    $i++;
+  }
+  echo "<br>";
+  echo '|===';
+  ?>
+  </td></tr>
+</tbody>
+  </table>
+
+</div>
 
 <br></div>
-<br> 
+<br>
 <button id="analysis-opener">Open Analysis Dialog</button>
 
 <div id="workshop-dialog" title="Recommended Workshops">
@@ -789,7 +827,7 @@ $i++;
     <thead>
     <tr>
     	  <th>ID</th>
-        <th>Workshops</th>        
+        <th>Workshops</th>
     </tr>
     </thead>
 <tbody>
