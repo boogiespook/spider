@@ -141,6 +141,7 @@ include 'dbconnect.php';
 $userId = $_SESSION['usr_id'];
 
 ?>
+
     <div class="container">
 
       <!-- Main component for a primary marketing message or call to action -->
@@ -196,6 +197,7 @@ $userId = $_SESSION['usr_id'];
 <option value=Turkey>Turkey</option>
 </select>
   </p>
+<!--
 <label  class="w3-label w3-validate">Domain</label>
 <select name="domain">
 <option value=Government>Government</option>
@@ -208,7 +210,7 @@ $userId = $_SESSION['usr_id'];
 <option value=Energy>Energy</option>
 </select>
   </p>
-    
+-->    
     
   </div>
   <div id="tabs-3">
