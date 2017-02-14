@@ -3,10 +3,9 @@ function connectDB() {
 ## Database stuff
 global $db;
 if ($_SERVER["HTTP_HOST"] == "localhost") {
-	$db = mysqli_connect('localhost','adminzvJZccK','5Et6HuymAm_j');
+	$db = mysqli_connect('localhost','XXXXXXX','XXXXXXX');
 } else {
-	#$db = mysqli_connect('mysql-innovate.44fs.preview.openshiftapps.com','adminzvJZccK','5Et6HuymAm_j');
-	$db = mysqli_connect('172.30.158.48','adminzvJZccK','5Et6HuymAm_j');
+	$db = mysqli_connect('111.111.111.111','XXXXXXX','XXXXXXX');
 }
 	if (!$db) {
 	die("Unable to connect to database");
