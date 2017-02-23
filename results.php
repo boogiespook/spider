@@ -247,17 +247,41 @@ table {
       minWidth: 400
     });
  
-    $( "#workshop-opener" ).on( "click", function() {
-      $( "#workshop-dialog" ).dialog( "open" );
+    $("#workshop-opener" ).on( "click", function() {
+      $("#workshop-dialog" ).dialog( "open" );
     });
+
   } );
   </script>
+
+  <script>
+  $( function() {
+    $( "#priorities-dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "drop",
+        duration: 1000
+      },
+      minWidth: 800
+    });
+ 
+    $("#priorities-opener" ).on( "click", function() {
+      $("#priorities-dialog" ).dialog( "open" );
+    });
+
+  } );
+  </script>
+
 
 </head>
 
 <body>
       <div id="rh-logo">      
-<img src="shadowman_very_small.png" />      
+<img src="./shadowman_very_small.png" />      
       </div>
 <?php  date_default_timezone_set("Europe/London"); ?>
       <div id="wrapper">
@@ -378,12 +402,19 @@ $automation_dev_array = array("Ad-hoc tool selection","Manual deployment (App + 
 $automation_ops_array = array("Core build for OS only","Basic (manual) provisioning","Patch & Release management (OS)","QA staging process and SOE","Automated OS Builds","Full Push Button Infrastructure");
 $methodology_dev_array = array("No defined methodology","Defined waterfall approach","Limited agile development on new projects (not including operations)","Agile development through to production & ops","Full DevOps culture");
 $methodology_ops_array = array("Hosting/Management Only","Defined SLAs and ITIL","	Compliance & Security Auditing","SOE","Full DevOps culture");
-$strategy_dev_array = array("Ad-hoc choice of application dev tools","Selected vendor tech roadmap","Iterative development of existing applications.Limited legacy strategy","Focus on new platforms & limited legacy platforms","Holistic & defined overall development strategy");
-$strategy_ops_array = array("Ad-hoc choice of future platforms","Selected vendor tech roadmap","Focus on maintaining existing infrastructure","Primary focus on new applications","Defined strategy for exsiting and new architectures");
-$influence_dev_array = array("The business dictates requirements","Mature requirements gathering approach (e.g. Agile user stories)","MVP approach","Multiple projects against business needs","IT driven business innovation");
-$influence_ops_array = array("Instances of negative business impact","Good functioning service operations (i.e few unscheduled outage, but slow to deploy)","Project based service offerings (i.e no unscheduled outages and rapid deployment)","Self sevice operations for development & the business","Transparent integration with project IT");
+$architecture_dev_array = array("Ad-hoc choice of application dev tools","Selected vendor tech roadmap","Iterative development of existing applications.Limited legacy strategy","Focus on new platforms & limited legacy platforms","Holistic & defined overall development strategy");
+$architecture_ops_array = array("Ad-hoc choice of future platforms","Selected vendor tech roadmap","Focus on maintaining existing infrastructure","Primary focus on new applications","Defined strategy for exsiting and new architectures");
+$strategy_dev_array = array("The business dictates requirements","Mature requirements gathering approach (e.g. Agile user stories)","MVP approach","Multiple projects against business needs","IT driven business innovation");
+$strategy_ops_array = array("Instances of negative business impact","Good functioning service operations (i.e few unscheduled outage, but slow to deploy)","Project based service offerings (i.e no unscheduled outages and rapid deployment)","Self sevice operations for development & the business","Transparent integration with project IT");
 $resources_dev_array = array("Traditional programming techniques with No agreed tools","Initial agile adoption with 1 backlog per team","Extended team collaboration. Common DevOps skills","Continous cross-team improvement and collaboration","100% DevOps projects and Full cross-functional teams");
 $resources_ops_array = array("Standard \"Unix-like\" skills & no scripting skills","Direct VM interaction, limited scripting","Dynamic, templated images","Fully automated & deployment skills","100% DevOps engineers");
+#$architecture_dev_array = array("Ad-hoc choice of application dev tools","Selected vendor tech roadmap","Iterative development of existing applications.Limited legacy strategy","Focus on new platforms & limited legacy platforms","Holistic & defined overall development strategy");
+#$architecture_ops_array = array("Ad-hoc choice of future platforms","Selected vendor tech roadmap","Focus on maintaining existing infrastructure","Primary focus on new applications","Defined strategy for exsiting and new architectures");
+#$resources_dev_array = array("The business dictates requirements","Mature requirements gathering approach (e.g. Agile user stories)","MVP approach","Multiple projects against business needs","IT driven business innovation");
+#$resources_ops_array = array("Instances of negative business impact","Good functioning service operations (i.e few unscheduled outage, but slow to deploy)","Project based service offerings (i.e no unscheduled outages and rapid deployment)","Self sevice operations for development & the business","Transparent integration with project IT");
+#$resources_dev_array = array("Traditional programming techniques with No agreed tools","Initial agile adoption with 1 backlog per team","Extended team collaboration. Common DevOps skills","Continous cross-team improvement and collaboration","100% DevOps projects and Full cross-functional teams");
+#$resources_ops_array = array("Standard \"Unix-like\" skills & no scripting skills","Direct VM interaction, limited scripting","Dynamic, templated images","Fully automated & deployment skills","100% DevOps engineers");
+
 $totalDev = $totalOps = 0;
 
 $workshops = array();
@@ -414,7 +445,7 @@ foreach( $url_qry_str as $param )
     {
       $var =  explode('=', $param, 2);
       if(substr($var[0],0,1) == "o") { $ops_arr[]=ceil($var[1]); };
-      if(substr($var[0],0,1) == "d") { $dev_arr[]=ceil($var[1]); };
+      if(substr($var[0],0,1) == "d") { $dev_arr[]=ceil($var[1]);};
       if(substr($var[0],0,4) == "name") { $custName=urldecode($var[1]); };
       if(substr($var[0],0,6) == "status") { $status=urldecode($var[1]); };
     }
@@ -422,11 +453,20 @@ foreach( $url_qry_str as $param )
 $areas = array(
 	0 => "Automation",
 	1 => "Methodology",
-	2 => "Strategy",
-	3 => "Business Influence",
+	2 => "Architecture",
+	3 => "Strategy",
 	4 => "Resources"
 );
 
+$areaWeighting = array(
+	0 => "1",
+	1 => "2",
+	2 => "4",
+	3 => "8",
+	4 => "16"
+);
+
+$analysis = $recommendations = $weighting = $oWeight = $dWeight = array();
 
 ## Connect to the Database 
 connectDB();
@@ -436,58 +476,26 @@ if ($status == "Completed") {
 	$result = mysql_query($qq);
 }
 
-$o = $ops_arr[0];
-$d = $dev_arr[0];
-$totalDev += $d;
-$totalOps += $o;
-echo "    <tr>
-        <td>Automation</td>
-        <td><b>$dev_arr[0]</b> - $automation_dev_array[$d] </td>
-        <td><b>$ops_arr[0]</b> - $automation_ops_array[$o] </td>
-    </tr>";        
-    
-$o = $ops_arr[1];
-$d = $dev_arr[1];
-$totalDev += $d;
-$totalOps += $o;
+for ($ii = 0; $ii < 5; $ii++) {
+	$lcArea=strtolower($areas[$ii]);
+	$lcDev=$lcArea."_dev_array";
+	$lcOps=$lcArea."_ops_array";
+	$o = $ops_arr[$ii];
+	$weighting['ops'][$areas[$ii]] = $ops_arr[$ii] * $areaWeighting[$ii];
+	$weighting['dev'][$areas[$ii]] = $dev_arr[$ii] * $areaWeighting[$ii];
+	$oWeight[$areas[$ii]] = $ops_arr[$ii] * $areaWeighting[$ii];
+	$dWeight[$areas[$ii]] = $dev_arr[$ii] * $areaWeighting[$ii];
+	$d = $dev_arr[$ii];
+	$totalDev += $d;
+	$totalOps += $o;
 
 echo "    <tr>
-        <td>Methodology</td>
-        <td><b>$dev_arr[1]</b> - $methodology_dev_array[$d] </td>
-        <td><b>$ops_arr[1]</b> - $methodology_ops_array[$o] </td>
+        <td>$areas[$ii] </td>
+        <td><b>$dev_arr[$ii]</b> - " . ${$lcDev}[$d] . " </td>
+        <td><b>$ops_arr[$ii]</b> - " . ${$lcOps}[$o] . " </td>
     </tr>";        
-
-$o = $ops_arr[2];
-$d = $dev_arr[2];
-$totalDev += $d;
-$totalOps += $o;
-echo "    <tr>
-        <td>Architecture</td>
-        <td><b>$dev_arr[2]</b> - $strategy_dev_array[$d] </td>
-        <td><b>$ops_arr[2]</b> - $strategy_ops_array[$o] </td>
-    </tr>";        
-    
-$o = $ops_arr[3];
-$d = $dev_arr[3];
-$totalDev += $d;
-$totalOps += $o;
-echo "    <tr>
-        <td>Strategy</td>
-        <td><b>$dev_arr[3]</b> - $influence_dev_array[$d] </td>
-        <td><b>$ops_arr[3]</b> - $influence_ops_array[$o] </td>
-    </tr>";      
-    
-$o = $ops_arr[4];
-$d = $dev_arr[4];
-$totalDev += $d;
-$totalOps += $o;      
-echo "    <tr>
-        <td>Resources</td>
-        <td><b>$dev_arr[4]</b> - $resources_dev_array[$d] </td>
-        <td><b>$ops_arr[4]</b> - $resources_ops_array[$o] </td>
-    </tr>";        
+}    
   
-$analysis = $recommendations = array();
 
 ## Assess Dev vs Ops
 
@@ -560,10 +568,8 @@ array_push($workshops,$workshopLinks['AdaptiveSOE']);
 array_push($workshops,$workshopLinks['AnsibleAutomation']);
 }
 
-#$automationAnalysis = "";
 if ($ops_arr[0]  > 2) {
 	$automationAnalysis = "The Ops team provide good use of automation";
-#	$automationRecommendation = "";
 	if ($dev_arr[0] < 2) {
 		$automationAnalysis .= " although less automation is used by the Dev team";
 		$automationRecommendation = "Increase automation in the Dev team";
@@ -769,7 +775,6 @@ array_push($workshops,$workshopLinks['OSEP']);
     </thead>
     <tbody>
 <?php
-######  ADD SECTION ON IMPACT STATEMENTS (SO WHAT?) ####### 
 $i=1;
 foreach ($analysis as $key => $answer) {
 echo "<tr><td>$i</td><td>$answer</td><td>$recommendations[$key]</td></tr>";
@@ -782,6 +787,57 @@ $i++;
 <br></div>
 <br> 
 <button id="analysis-opener">Open Analysis Dialog</button>
+
+<div id="priorities-dialog" title="Priority Areas">
+    <table class="bordered">
+    <thead>
+    <tr>
+    	  <th>Timescale</th>
+        <th>Development Team</th>        
+        <th>Operations Team</th>        
+    </tr>
+    </thead>
+<tbody>
+<?php
+## Create an array with all workshops by Dev/Ops breakdown
+$allWorkshops = array(
+	"Development" => array (
+	  	"Automation" => "CI/CD To Production",
+	  	"Methodology" => "Container Platforms",
+	  	"Architecture" => "Microservices",
+	  	"Strategy" => "Business Influence Mapping",
+	  	"Resources" => "Agile Development Workshop",
+	),
+	"Operations" => array (
+	  	"Automation" => "Adaptive SOE and Ansible Automation",
+	  	"Methodology" => "Innovation Labs (Ops Focus)",
+	  	"Architecture" => "Application Lifecycle Management",
+	  	"Strategy" => "Open Source Strategy",
+	  	"Resources" => "RH Training / GLS organisation review of skills",
+	)
+);
+
+asort($oWeight);
+asort($dWeight);
+$top3Dev = $top3Ops = array();
+
+foreach ($oWeight as $key => $value) {
+	array_push($top3Ops,$key);
+}
+
+foreach ($dWeight as $key => $value) {
+	array_push($top3Dev,$key);
+}
+
+$timeScales = array("Short Term","Medium Term","Long Term");
+for ($i=0; $i < 3; $i++) {
+echo "<tr><td>$timeScales[$i]</td><td><b>$top3Dev[$i]</b><br>" . $allWorkshops['Development'][$top3Dev[$i]] . "</td><td><b>$top3Ops[$i]</b><br>" . $allWorkshops['Operations'][$top3Ops[$i]] . "</td></tr>";
+}
+?>
+</tbody>
+</table>
+</div>
+<button id="priorities-opener">Top 3 Action Areas</button>
 
 <div id="workshop-dialog" title="Recommended Workshops">
 
@@ -804,6 +860,11 @@ $i++;
 </table>
 </div>
 <button id="workshop-opener">Workshop Links</button>
+
+
+
+
+
 </div>
 <!-- end of main content div -->
 <!-- end of wrapper div -->
