@@ -466,7 +466,7 @@ $areaWeighting = array(
 	4 => "16"
 );
 
-$analysis = $recommendations = $weighting = $oWeight = $dWeight = array();
+$analysis = $recommendations = $weighting = $oWeight = $dWeight = $tWeights = array();
 
 ## Connect to the Database 
 connectDB();
@@ -481,8 +481,10 @@ for ($ii = 0; $ii < 5; $ii++) {
 	$lcDev=$lcArea."_dev_array";
 	$lcOps=$lcArea."_ops_array";
 	$o = $ops_arr[$ii];
-	$weighting['ops'][$areas[$ii]] = $ops_arr[$ii] * $areaWeighting[$ii];
-	$weighting['dev'][$areas[$ii]] = $dev_arr[$ii] * $areaWeighting[$ii];
+	$weighting['Operations_'. $areas[$ii]] = $ops_arr[$ii]+1 * $areaWeighting[$ii];
+	$weighting['Development_'. $areas[$ii]] = $dev_arr[$ii]+1 * $areaWeighting[$ii];
+#	$weighting['ops'][$areas[$ii]] = $ops_arr[$ii] * $areaWeighting[$ii];
+#	$weighting['dev'][$areas[$ii]] = $dev_arr[$ii] * $areaWeighting[$ii];
 	$oWeight[$areas[$ii]] = $ops_arr[$ii] * $areaWeighting[$ii];
 	$dWeight[$areas[$ii]] = $dev_arr[$ii] * $areaWeighting[$ii];
 	$d = $dev_arr[$ii];
@@ -818,7 +820,20 @@ $allWorkshops = array(
 );
 
 asort($oWeight);
+#echo "Ops Weight<br>";
+#var_dump($oWeight);
+#echo "<br>";
+
 asort($dWeight);
+#echo "Dev Weight<br>";
+#var_dump($dWeight);
+#echo "<br>";
+
+#echo "<br><br>Main Weighting <br><br>";
+#asort($weighting);
+#print_r($weighting);
+
+
 $top3Dev = $top3Ops = array();
 
 foreach ($oWeight as $key => $value) {
@@ -828,6 +843,8 @@ foreach ($oWeight as $key => $value) {
 foreach ($dWeight as $key => $value) {
 	array_push($top3Dev,$key);
 }
+
+#print_r($top3Dev);
 
 $timeScales = array("Short Term","Medium Term","Long Term");
 for ($i=0; $i < 3; $i++) {
