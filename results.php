@@ -408,12 +408,6 @@ $strategy_dev_array = array("The business dictates requirements","Mature require
 $strategy_ops_array = array("Instances of negative business impact","Good functioning service operations (i.e few unscheduled outage, but slow to deploy)","Project based service offerings (i.e no unscheduled outages and rapid deployment)","Self sevice operations for development & the business","Transparent integration with project IT");
 $resources_dev_array = array("Traditional programming techniques with No agreed tools","Initial agile adoption with 1 backlog per team","Extended team collaboration. Common DevOps skills","Continous cross-team improvement and collaboration","100% DevOps projects and Full cross-functional teams");
 $resources_ops_array = array("Standard \"Unix-like\" skills & no scripting skills","Direct VM interaction, limited scripting","Dynamic, templated images","Fully automated & deployment skills","100% DevOps engineers");
-#$architecture_dev_array = array("Ad-hoc choice of application dev tools","Selected vendor tech roadmap","Iterative development of existing applications.Limited legacy strategy","Focus on new platforms & limited legacy platforms","Holistic & defined overall development strategy");
-#$architecture_ops_array = array("Ad-hoc choice of future platforms","Selected vendor tech roadmap","Focus on maintaining existing infrastructure","Primary focus on new applications","Defined strategy for exsiting and new architectures");
-#$resources_dev_array = array("The business dictates requirements","Mature requirements gathering approach (e.g. Agile user stories)","MVP approach","Multiple projects against business needs","IT driven business innovation");
-#$resources_ops_array = array("Instances of negative business impact","Good functioning service operations (i.e few unscheduled outage, but slow to deploy)","Project based service offerings (i.e no unscheduled outages and rapid deployment)","Self sevice operations for development & the business","Transparent integration with project IT");
-#$resources_dev_array = array("Traditional programming techniques with No agreed tools","Initial agile adoption with 1 backlog per team","Extended team collaboration. Common DevOps skills","Continous cross-team improvement and collaboration","100% DevOps projects and Full cross-functional teams");
-#$resources_ops_array = array("Standard \"Unix-like\" skills & no scripting skills","Direct VM interaction, limited scripting","Dynamic, templated images","Fully automated & deployment skills","100% DevOps engineers");
 
 $totalDev = $totalOps = 0;
 
@@ -483,8 +477,6 @@ for ($ii = 0; $ii < 5; $ii++) {
 	$o = $ops_arr[$ii];
 	$weighting['Operations_'. $areas[$ii]] = $ops_arr[$ii]+1 * $areaWeighting[$ii];
 	$weighting['Development_'. $areas[$ii]] = $dev_arr[$ii]+1 * $areaWeighting[$ii];
-#	$weighting['ops'][$areas[$ii]] = $ops_arr[$ii] * $areaWeighting[$ii];
-#	$weighting['dev'][$areas[$ii]] = $dev_arr[$ii] * $areaWeighting[$ii];
 	$oWeight[$areas[$ii]] = $ops_arr[$ii] * $areaWeighting[$ii];
 	$dWeight[$areas[$ii]] = $dev_arr[$ii] * $areaWeighting[$ii];
 	$d = $dev_arr[$ii];
@@ -819,20 +811,9 @@ $allWorkshops = array(
 	)
 );
 
+## Sort the arrays to get them in ascending order of priority
 asort($oWeight);
-#echo "Ops Weight<br>";
-#var_dump($oWeight);
-#echo "<br>";
-
 asort($dWeight);
-#echo "Dev Weight<br>";
-#var_dump($dWeight);
-#echo "<br>";
-
-#echo "<br><br>Main Weighting <br><br>";
-#asort($weighting);
-#print_r($weighting);
-
 
 $top3Dev = $top3Ops = array();
 
@@ -843,8 +824,6 @@ foreach ($oWeight as $key => $value) {
 foreach ($dWeight as $key => $value) {
 	array_push($top3Dev,$key);
 }
-
-#print_r($top3Dev);
 
 $timeScales = array("Short Term","Medium Term","Long Term");
 for ($i=0; $i < 3; $i++) {
