@@ -9,7 +9,7 @@ session_start();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> -->
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> 
 
 <!--	<script src="js/jquery-1.10.2.js"></script>-->
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -35,8 +35,8 @@ function validateForm() {
     var dotpos = x.lastIndexOf(".");
     var re = /\S+@redhat.com/;
 
-//    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-    if (! x.match(re) ) {
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+//    if (! x.match(re) ) {
         alert("Not a valid e-mail address");
         return false;
     }
