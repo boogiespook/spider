@@ -280,9 +280,6 @@ table {
 </head>
 
 <body>
-      <div id="rh-logo">      
-<img src="./shadowman_very_small.png" />      
-      </div>
 <?php  date_default_timezone_set("Europe/London"); ?>
       <div id="wrapper">
 
@@ -467,7 +464,7 @@ connectDB();
 
 if ($status == "Completed") {
 	$qq = "INSERT IGNORE INTO data (client,o1,o2,o3,o4,o5,d1,d2,d3,d4,d5,hash,date) VALUES ('$custName',$ops_arr[0],$ops_arr[1],$ops_arr[2],$ops_arr[3],$ops_arr[4],$dev_arr[0],$dev_arr[1],$dev_arr[2],$dev_arr[3],$dev_arr[4],'$md5',NOW())";
-	$result = mysql_query($qq);
+	$result = mysqli_query($GLOBALS["___mysqli_ston"], $qq);
 }
 
 for ($ii = 0; $ii < 5; $ii++) {

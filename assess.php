@@ -9,7 +9,7 @@ session_start();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
-<!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> -->
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> -->
 
 <!--	<script src="js/jquery-1.10.2.js"></script>-->
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -21,6 +21,27 @@ session_start();
     $( "#tabs" ).tabs();
   } );
   </script>
+  
+    <script>
+  $( function() {
+    $( "#region" ).selectmenu();
+  } );
+  </script>
+
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["rhEmail"].value;
+    var atpos = x.indexOf("@");
+    var dotpos = x.lastIndexOf(".");
+    var re = /\S+@redhat.com/;
+
+//    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+    if (! x.match(re) ) {
+        alert("Not a valid e-mail address");
+        return false;
+    }
+}
+</script>
   
     <script>
   $( function() {
@@ -78,14 +99,18 @@ p { font-family: 'Inder', sans-serif; line-height: 28px; margin-bottom: 15px; co
 
 
 
-label {
-    color: #6E6363;
-    display:inline-block;
-}
 input {
   border-radius: 15px;
   margin: 10px;
 } 	
+
+    fieldset {
+      border: 0;
+    }
+
+    .overflow {
+      height: 200px;
+    }
 
 h3 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 20px; font-weight: 400; line-height: 32px; margin: 0 0 14px; }
 
@@ -147,12 +172,12 @@ $userId = $_SESSION['usr_id'];
 
       <!-- Main component for a primary marketing message or call to action -->
 <!--      <div class="jumbotron"> -->
-<form id="innovate-form" action="tmp.php">
+<form name="myForm" id="innovate-form" action="tmp.php"  class="w3-container">
 
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">Introduction</a></li>
-    <li><a href="#tabs-2">Client Details</a></li>
+    <li><a href="#tabs-2">Details</a></li>
     <li><a href="#tabs-3">Automation</a></li>
     <li><a href="#tabs-4">Methodology</a></li>
     <li><a href="#tabs-5">Architecture</a></li>
@@ -176,13 +201,18 @@ $userId = $_SESSION['usr_id'];
 <p>To complete the assessment, please use the tabs and check the comment which better suits your environment.  Once complete, click "Submit" from the Submit Tab.</p>
   </div>
   <div id="tabs-2">
-    <p>
-      <label class="w3-label w3-validate">Customer Name</label>
-    <input type="text" name="customerName" size="20" >
+    
+<label class="w3-label w3-validate">Client Name</label>
+<input class="w3-input" name="customerName" type="text" required>
 
-    </p>
-<label class="w3-label w3-validate">Region</label>
-<select name="region">
+    <br>
+<label class="w3-label w3-validate" >Red Hat Email Address</label>    
+<input onfocusout="validateForm()" class="w3-input" name="rhEmail"  type="text" required>
+    <br>
+
+  <fieldset>
+    <label for="region">Red Hat Region</label>
+    <select name="region" id="region">
 <option value=DA>DA</option>
 <option value=CH>CH</option>
 <option value=Benelux>Benelux</option>
@@ -196,7 +226,9 @@ $userId = $_SESSION['usr_id'];
 <option value=Iberia>Iberia</option>
 <option value=MENA>MENA</option>
 <option value=Turkey>Turkey</option>
-</select>
+    </select>
+    </fieldset>
+    
   </p>
 <!--
 <label  class="w3-label w3-validate">Domain</label>

@@ -159,10 +159,10 @@ if ($newScore != $oldScore && $oldClient == $newClient) {
 return $str;
 }
 $qq = "SELECT * FROM data ORDER BY client,date DESC";
-$result = mysql_query($qq);
+$result = mysqli_query($GLOBALS["___mysqli_ston"], $qq);
 $prevClient = "QQQQQQQQQQQQQQQQQ";
 $oldRowD1 = $oldRowD2 = $oldRowD3 = $oldRowD4 = $oldRowD5 = $oldRowO1 = $oldRowO2 = $oldRowO3 = $oldRowO4 = $oldRowO5 = "X";
-while ($row = mysql_fetch_assoc($result)) {
+while ($row = mysqli_fetch_assoc($result)) {
 	if ($row['client'] != $prevClient) { 
 		$col = "id=new";
 		$comment = "(Most Recent)";
